@@ -1,0 +1,209 @@
+@import '~@wordpress/base-styles/variables';
+
+.wp-block-tzm-section {
+	--subtract-height: 0px;
+	
+	// This block has customizable padding, border-box makes that more predictable.
+	box-sizing: border-box;
+	
+	.has-background-dim:not([class*="-background-color"]) {
+		background-color: $black;
+	}
+
+	.has-background-dim.has-background-gradient {
+		background-color: transparent;
+	}
+
+	&.has-background-dim::before {
+		content: "";
+		background-color: inherit;
+	}
+
+	.wp-block-tzm-section__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: z-index(".wp-block-tzm-section.has-background-dim::before");
+		opacity: 0.5;
+	}
+	
+	svg.wp-block-tzm-section__divider-shape {
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		pointer-events: none;
+		z-index: 1;
+		
+		&.is-flipped { transform: scaleX(-1) }
+		
+		&.has-bottom-position {
+			bottom: -1px;
+		}
+		&.has-top-position {
+			top: -1px;
+			transform: rotate(180deg);
+			&.is-flipped { transform: rotate(180deg) scaleX(-1) }
+		}
+	}
+	
+	&[data-height-selector] {
+		min-height: calc(100vh - var(--subtract-height));
+	}
+}
+
+.wp-block-tzm-section-image,
+.wp-block-tzm-section {
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	min-height: 430px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	
+
+	// The following styles are needed to support legacy blocks added prior to the update
+	// that moved opacity to a nested span.
+	// https://github.com/WordPress/gutenberg/pull/35065
+	// https://github.com/WordPress/gutenberg/pull/38362
+	@for $i from 1 through 10 {
+		&.has-background-dim.has-background-dim-#{ $i * 10 } {
+			&:not(.has-background-gradient)::before,
+			.wp-block-tzm-section__background,
+			.wp-block-tzm-section__gradient-background {
+				opacity: $i * 0.1;
+			}
+		}
+	}
+
+	@for $i from 0 through 10 {
+		// Keep .wp-block-tzm-section__gradient-background for v8 deprecation
+		.wp-block-tzm-section__gradient-background.has-background-dim.has-background-dim-#{ $i * 10 },
+		.wp-block-tzm-section__background.has-background-dim.has-background-dim-#{ $i * 10 } {
+			opacity: $i * 0.1;
+		}
+	}
+
+	// Using flexbox without an assigned height property breaks vertical center alignment in IE11.
+	// Appending an empty ::after element tricks IE11 into giving the section image an implicit height, which sidesteps this issue.
+	&::after {
+		display: block;
+		content: "";
+		font-size: 0;
+		min-height: inherit;
+
+		// IE doesn't support flex so omit that.
+		@supports (position: sticky) {
+			content: none;
+		}
+	}
+
+	.wp-block-tzm-section__inner-container {
+		width: 100%;
+		color: $white;
+		z-index: 10;
+	}
+
+	&.is-light {
+		.wp-block-tzm-section__inner-container {
+			color: $black;
+		}
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		&:not(.has-text-color) {
+			color: inherit;
+		}
+	}
+
+	// Vertical Alignment
+	&.is-vertically-aligned-top {
+		align-items: flex-start;
+		justify-content: center;
+	}
+	&.is-vertically-aligned-center {
+		align-items: center;
+		justify-content: center;
+	}
+	&.is-vertically-aligned-bottom {
+		align-items: flex-end;
+		justify-content: center;
+	}
+
+	&.has-custom-content-position.has-custom-content-position {
+		.wp-block-tzm-section__inner-container {
+			margin: 0;
+			width: auto;
+		}
+	}
+	
+	.wp-block-tzm-section__background {
+		z-index: 1;
+	}
+	
+	// Extra specificity for in edit mode where other styles would override it otherwise.
+	.wp-block-tzm-section__image-background,
+	video.wp-block-tzm-section__video-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		max-height: none;
+		object-fit: cover;
+		outline: none;
+		border: none;
+		box-shadow: none;
+	}
+}
+
+.wp-block-tzm-section-image,
+.wp-block-tzm-section,
+.wp-block-tzm-section__image-background,
+video.wp-block-tzm-section__video-background {
+	&.has-parallax-fixed {
+		background-attachment: fixed;
+
+		// Mobile Safari does not support fixed background attachment properly.
+		// See also https://stackoverflow.com/questions/24154666/background-size-cover-not-working-on-ios
+		// Chrome on Android does not appear to support the attachment at all: https://issuetracker.google.com/issues/36908439
+		@supports (-webkit-overflow-scrolling: touch) {
+			background-attachment: scroll;
+		}
+
+		// Remove the appearance of scrolling based on OS-level animation preferences.
+		@media (prefers-reduced-motion: reduce) {
+			background-attachment: scroll;
+		}
+	}
+}
+
+[class*="has-parallax-"] {
+	position: relative;
+	z-index: 0;
+  
+	> .jarallax-img {
+	  position: absolute;
+	  object-fit: cover;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  z-index: -1;
+	}
+}

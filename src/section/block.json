@@ -1,0 +1,120 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "tzm/section",
+	"title": "Section",
+	"category": "design",
+	"description": "Display your content in a section block - great for eye-catching headers and sections.",
+	"textdomain": "tzm-section-block",
+	"attributes": {
+		"url": {
+			"type": "string"
+		},
+		"useFeaturedImage": {
+			"type": "boolean",
+			"default": false
+		},
+		"id": {
+			"type": "number"
+		},
+		"alt": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "alt",
+			"default": ""
+		},
+		"parallaxMode": {
+			"type": "string"
+		},
+		"isRepeated": {
+			"type": "boolean",
+			"default": false
+		},
+		"dimRatio": {
+			"type": "number",
+			"default": 10
+		},
+		"overlayColor": {
+			"type": "string"
+		},
+		"customOverlayColor": {
+			"type": "string"
+		},
+		"backgroundType": {
+			"type": "string",
+			"default": "image"
+		},
+		"focalPoint": {
+			"type": "object"
+		},
+		"minHeight": {
+			"type": "number"
+		},
+		"minHeightUnit": {
+			"type": "string"
+		},
+		"minHeightSelector": {
+			"type": "string"
+		},
+		"gradient": {
+			"type": "string"
+		},
+		"customGradient": {
+			"type": "string"
+		},
+		"verticalAlignment": {
+			"type": "string"
+		},
+		"isDark": {
+			"type": "boolean",
+			"default": true
+		},
+		"dividerTop": {
+			"type": "object",
+			"default": {
+				"shape": "",
+				"flipped": false,
+				"color": "#ffffff"
+			}
+		},
+		"dividerBottom": {
+			"type": "object",
+			"default": {
+				"shape": "",
+				"flipped": false,
+				"color": "#ffffff"
+			}
+		},
+		"dividerHeight": {
+			"type": "number",
+			"default": 10
+		},
+		"allowedBlocks": {
+			"type": "array"
+		},
+		"templateLock": {
+			"type": ["string", "boolean"],
+			"enum": ["all", "insert", false]
+		}
+	},
+	"usesContext": ["postId", "postType"],
+	"supports": {
+		"anchor": true,
+		"align": ["wide", "full"],
+		"html": false,
+		"spacing": {
+			"padding": true,
+			"margin": ["top", "bottom"]
+		},
+		"color": {
+			"__experimentalDuotone": "> .wp-block-tzm-section__image-background, > .wp-block-tzm-section__video-background",
+			"text": false,
+			"background": false
+		}
+	},
+	"editorScript": "tzm-section-block-editor",
+	"script": "tzm-section-block",
+	"editorStyle": "tzm-section-block-editor",
+	"style": "tzm-section-block"
+}

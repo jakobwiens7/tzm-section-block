@@ -1,0 +1,33 @@
+{
+	"name": "tzm-section-block",
+	"version": "1.0.1-beta",
+	"description": "Wrap your content in a versatile section block - great for impressive headers and sections with eye-catching features like parallax effects and shape dividers.",
+	"author": "TezmoMedia - Jakob Wiens",
+	"license": "GPL-2.0-or-later",
+	"main": "dist/tzm-section.js",
+	"scripts": {
+		"build": "wp-scripts build src/tzm-section.js src/tzm-section-frontend.js --output-path=dist",
+		"start": "wp-scripts start src/tzm-section.js src/tzm-section-frontend.js --output-path=dist",
+		"format": "wp-scripts format",
+		"format:src": "wp-scripts format ./src",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^9.1.0",
+		"@wordpress/blocks": "^11.8.0",
+		"@wordpress/i18n": "^4.9.0",
+		"fast-average-color": "^7.1.0",
+		"jarallax": "^2.0.3",
+		"local-wpcli": "^2.1.0",
+		"po2json": "^0.3.0"
+	},
+	"devDependencies": {
+		"@wordpress/base-styles": "^4.5.0",
+		"@wordpress/eslint-plugin": "^12.4.0",
+		"@wordpress/scripts": "^23.1.0",
+		"prettier": "^2.6.2"
+	}
+}
