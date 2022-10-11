@@ -6,17 +6,17 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tzm-section-"
 "block\n"
 "POT-Creation-Date: 2021-03-24T14:53:25+01:00\n"
-"PO-Revision-Date: 2022-06-07 16:36+0000\n"
+"PO-Revision-Date: 2022-06-07 16:28+0000\n"
 "Last-Translator: \n"
-"Language-Team: Deutsch\n"
-"Language: de_DE\n"
+"Language-Team: Deutsch (Sie)\n"
+"Language: de_DE_formal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: tzm-section-block\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Loco-Version: 2.6.2; wp-6.0"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.5.5; wp-5.8.1"
 
 #: dist/tzm-section.js:1 src/section/shared.js:150
 msgid "- Disabled -"
@@ -28,7 +28,7 @@ msgstr "- Kein Parallax -"
 
 #: dist/tzm-section.js:1 src/section/index.js:56
 msgid "<strong>Aim high</strong>"
-msgstr "<strong>Hoch hinaus</strong>"
+msgstr "Hoch hinaus"
 
 #: dist/tzm-section.js:1 src/section/shared.js:361
 msgid "Asymmetric curve In"
@@ -52,8 +52,8 @@ msgid ""
 "Display your content in a section block - great for eye-catching headers and "
 "sections."
 msgstr ""
-"Stelle Inhalte in einem Sektions-Block dar - ideal für eindrucksvolle Header "
-"und Sektionen."
+"Stellen Sie Inhalte in einem Sektions-Block dar - ideal für eindrucksvolle "
+"Header und Sektionen."
 
 #: dist/section/block.json src/section/block.json
 msgctxt "block title"
@@ -105,8 +105,8 @@ msgid ""
 "Define an element to subtract its height from your full height section (e.g. "
 "'#navigation' or '.primary-menu')"
 msgstr ""
-"Bestimme ein Element um seine Höhe von deiner Vollbild-Sektion abzuziehen (z."
-" B. '#navigation' oder '.main-menu')"
+"Bestimmen Sie ein Element um seine Höhe von Ihrer Vollbild-Sektion "
+"abzuziehen (z. B. '#navigation' oder '.main-menu')"
 
 #: dist/tzm-section.js:1 src/section/edit/inspector-controls.js:514
 msgid "Divider height"
@@ -188,11 +188,11 @@ msgstr "Trennformen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:174
 msgid "Small triangle In"
-msgstr "Kleines Dreieck innen"
+msgstr "Großes Dreieck innen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:187
 msgid "Small triangle Out"
-msgstr "Kleines Dreieck außen"
+msgstr "Großes Dreieck außen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:257
 msgid "Small zigzag"
@@ -245,7 +245,7 @@ msgid ""
 "headers and sections with eye-catching features like parallax effects and "
 "shape dividers."
 msgstr ""
-"Packe deine Inhalte in einen vielseitigen Sektions-Block - ideal für "
+"Packen Sie Ihre Inhalte in einen vielseitigen Sektions-Block - ideal für "
 "anspruchsvolle Header und Sektionen mit beeindruckenden Parallax-Effekten "
 "und Trennformen."
 

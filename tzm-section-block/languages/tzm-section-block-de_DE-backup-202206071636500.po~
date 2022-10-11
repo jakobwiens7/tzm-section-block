@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tzm-section-"
 "block\n"
 "POT-Creation-Date: 2021-03-24T14:53:25+01:00\n"
-"PO-Revision-Date: 2022-06-07 16:36+0000\n"
+"PO-Revision-Date: 2022-06-07 16:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: tzm-section-block\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Loco-Version: 2.6.2; wp-6.0"
+"X-Loco-Version: 2.5.5; wp-5.8.1"
 
 #: dist/tzm-section.js:1 src/section/shared.js:150
 msgid "- Disabled -"
@@ -188,11 +188,11 @@ msgstr "Trennformen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:174
 msgid "Small triangle In"
-msgstr "Kleines Dreieck innen"
+msgstr "Großes Dreieck innen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:187
 msgid "Small triangle Out"
-msgstr "Kleines Dreieck außen"
+msgstr "Großes Dreieck außen"
 
 #: dist/tzm-section.js:1 src/section/shared.js:257
 msgid "Small zigzag"
