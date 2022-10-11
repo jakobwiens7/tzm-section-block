@@ -633,10 +633,10 @@ export default function SectionInspectorControls({
 				<SelectControl
 					label={ __( 'HTML element' ) }
 					options={ [
-						{ label: __( 'Default (<div>)' ), value: 'div' },
+						{ label: '<div>', value: 'div' },
 						{ label: '<header>', value: 'header' },
 						{ label: '<main>', value: 'main' },
-						{ label: '<section>', value: 'section' },
+						{ label: __( 'Default (<section>)', 'tzm-section-block' ), value: 'section' },
 						{ label: '<article>', value: 'article' },
 						{ label: '<aside>', value: 'aside' },
 						{ label: '<footer>', value: 'footer' },
