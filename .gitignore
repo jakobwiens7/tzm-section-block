@@ -1,3 +1,4 @@
 /node_modules
 /tzm-section-block
 /package-lock.json
+/.eslintrc
