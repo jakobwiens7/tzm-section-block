@@ -23,6 +23,7 @@ export default function SectionBlockControls({
 	setAttributes,
 	onSelectMedia,
 	currentSettings,
+	toggleUseFeaturedImage,
 }) {
 	const {
 		verticalAlignment,
@@ -64,17 +65,6 @@ export default function SectionBlockControls({
 			minHeightUnit: 'vh',
 		});
 	};
-
-	const toggleUseFeaturedImage = () => {
-		setAttributes({
-			id: undefined,
-			url: undefined,
-			useFeaturedImage: !useFeaturedImage,
-			backgroundType: useFeaturedImage
-				? IMAGE_BACKGROUND_TYPE
-				: undefined,
-		});
-	};
 	/* WIP: Shared variables END */
 
 	return (
@@ -105,9 +95,9 @@ export default function SectionBlockControls({
 					allowedTypes={ALLOWED_MEDIA_TYPES}
 					accept="image/*,video/*"
 					onSelect={onSelectMedia}
-					name={!url ? __('Add Media') : __('Replace')}
 					onToggleFeaturedImage={ toggleUseFeaturedImage }
 					useFeaturedImage={ useFeaturedImage }
+					name={!url ? __('Add Media') : __('Replace')}
 				/>
 			</BlockControls>
 		</>

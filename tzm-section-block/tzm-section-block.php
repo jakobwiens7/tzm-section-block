@@ -3,7 +3,7 @@
 /**
  * Plugin Name:		TZM Section Block
  * Description:		Wrap your content in a versatile section block - great for impressive headers and sections with eye-catching features like parallax effects and shape dividers.
- * Version:			1.0.6
+ * Version:			1.0.71
  * Author:			TezmoMedia - Jakob Wiens
  * Author URI:		https://www.tezmo.media
  * License:			GPL-2.0-or-later
@@ -155,27 +155,37 @@ function render_block_tzm_section($attributes, $content)
 
 		$image = get_the_post_thumbnail(null, 'post-thumbnail', $attr);
 
-		$content = str_replace(
-			'<div class="wp-block-tzm-section__background-wrapper">',
-			'<div class="wp-block-tzm-section__background-wrapper">' . $image,
-			$content
-		);
+		/*
+		 * Inserts the featured image between the (1st) section 'background' `span` and 'inner_container' `div`,
+		 * and removes eventual whitespace characters between the two (typically introduced at template level)
+		 */
+		$inner_container_start = '/<div\b[^>]+wp-block-tzm-section__inner-container[\s|"][^>]*>/U';
+		if (1 === preg_match($inner_container_start, $content, $matches, PREG_OFFSET_CAPTURE)) {
+			$offset  = $matches[0][1];
+			$content = substr($content, 0, $offset) . $image . substr($content, $offset);
+		}
 	} else {
-
 		if (in_the_loop()) {
 			update_post_thumbnail_cache();
 		}
-		$image_url = get_the_post_thumbnail_url();
 
-		$class = 'wp-block-tzm-section__image-background' . ($attributes['parallaxMode'] ? ' has-parallax-' . $attributes['parallaxMode'] : '');
+		$current_featured_image = get_the_post_thumbnail_url();
+		if (!$current_featured_image) {
+			return $content;
+		}
 
-		$style = "background-image:url('" . esc_url($image_url) . "')";
+		$processor = new WP_HTML_Tag_Processor($content);
+		$processor->next_tag();
 
-		$content = str_replace(
-			'<div class="wp-block-tzm-section__background-wrapper">',
-			'<div class="wp-block-tzm-section__background-wrapper">' . '<div class="' . $class . '" style="' . $style . '" data-img-repeat="repeat" data-img-size="auto"></div>',
-			$content
-		);
+		$class = $attributes['parallaxMode'] ? ' has-parallax-' . $attributes['parallaxMode'] : '';
+		$processor->add_class($class);
+
+		$styles         = $processor->get_attribute('style');
+		$merged_styles  = !empty($styles) ? $styles . ';' : '';
+		$merged_styles .= 'background-image:url(' . esc_url($current_featured_image) . ');';
+
+		$processor->set_attribute('style', $merged_styles);
+		$content = $processor->get_updated_html();
 	}
 
 	return $content;

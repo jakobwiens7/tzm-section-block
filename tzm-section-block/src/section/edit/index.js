@@ -1,4 +1,3 @@
-/* eslint-disable @wordpress/no-unsafe-wp-apis */
 /**
  * External dependencies
  */
@@ -10,9 +9,9 @@ import namesPlugin from 'colord/plugins/names';
  * WordPress dependencies
  */
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useMemo, useRef } from '@wordpress/element';
 import { Spinner } from '@wordpress/components';
-import { compose } from '@wordpress/compose';
+import { compose, useResizeObserver } from '@wordpress/compose';
 import {
 	withColors,
 	useBlockProps,
@@ -25,6 +24,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { isBlobURL } from '@wordpress/blob';
+import { store as noticesStore } from '@wordpress/notices';
 
 /**
  * Internal dependencies
@@ -135,16 +135,20 @@ function SectionEdit({
 
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch(blockEditorStore);
-
+	const { createErrorNotice } = useDispatch( noticesStore );
+	
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
 	const onSelectMedia = attributesFromMedia(setAttributes, dimRatio);
 	const isUploadingMedia = isTemporaryMedia(id, url);
-	const mediaElement = useRef();
+	
+	const onUploadError = ( message ) => {
+		createErrorNotice( message, { type: 'snackbar' } );
+	};
+	
 	const isSectionDark = useSectionIsDark(
 		url,
 		dimRatio,
-		overlayColor.color,
-		mediaElement
+		overlayColor.color
 	);
 
 	useEffect(() => {
@@ -155,6 +159,14 @@ function SectionEdit({
 
 	const isImageBackground = IMAGE_BACKGROUND_TYPE === backgroundType;
 	const isVideoBackground = VIDEO_BACKGROUND_TYPE === backgroundType;
+
+	const [ resizeListener, { height, width } ] = useResizeObserver();
+	const resizableBoxDimensions = useMemo( () => {
+		return {
+			height: minHeightUnit === 'px' ? minHeight : 'auto',
+			width: 'auto',
+		};
+	}, [ minHeight, minHeightUnit ] );
 
 	const minHeightWithUnit =
 		minHeight && minHeightUnit ? `${minHeight}${minHeightUnit}` : minHeight;
@@ -194,13 +206,16 @@ function SectionEdit({
 			className: 'wp-block-tzm-section__inner-container',
 		},
 		{
-			template: innerBlocksTemplate,
+			// Avoid template sync when the `templateLock` value is `all` or `contentOnly`.
+			// See: https://github.com/WordPress/gutenberg/pull/45632
+			template: ! hasInnerBlocks ? innerBlocksTemplate : undefined,
 			templateInsertUpdatesSelection: true,
 			allowedBlocks,
 			templateLock,
 		}
 	);
-
+	
+	const mediaElement = useRef();
 	const currentSettings = {
 		isVideoBackground,
 		isImageBackground,
@@ -209,6 +224,18 @@ function SectionEdit({
 		url,
 		isImgElement,
 		overlayColor,
+	};
+	
+	const toggleUseFeaturedImage = () => {
+		setAttributes( {
+			id: undefined,
+			url: undefined,
+			useFeaturedImage: ! useFeaturedImage,
+			dimRatio: dimRatio === 100 ? 50 : dimRatio,
+			backgroundType: useFeaturedImage
+				? IMAGE_BACKGROUND_TYPE
+				: undefined,
+		} );
 	};
 
 	const classes = classnames({
@@ -234,6 +261,7 @@ function SectionEdit({
 				setAttributes={setAttributes}
 				onSelectMedia={onSelectMedia}
 				currentSettings={currentSettings}
+				toggleUseFeaturedImage={ toggleUseFeaturedImage }
 			/>
 			<SectionInspectorControls
 				attributes={attributes}
@@ -242,6 +270,7 @@ function SectionEdit({
 				setOverlayColor={setOverlayColor}
 				sectionRef={ref}
 				currentSettings={currentSettings}
+				toggleUseFeaturedImage={ toggleUseFeaturedImage }
 			/>
 			<Tag
 				{...blockProps}
@@ -264,55 +293,54 @@ function SectionEdit({
 					}}
 					showHandle={isSelected}
 				/>
-				<div className={"wp-block-tzm-section__background-wrapper"}>
-					<span
-						aria-hidden="true"
-						className={classnames(
-							'wp-block-tzm-section__background',
-							dimRatioToClass(dimRatio),
-							{
-								[overlayColor.class]: overlayColor.class,
-								'has-background-dim': dimRatio !== undefined,
-								'has-background-gradient': gradientValue,
-								[gradientClass]: gradientClass,
-							}
-						)}
-						style={{ backgroundImage: gradientValue, ...bgStyle }}
-					/>
-					{url &&
-						isImageBackground &&
-						(isImgElement ? (
-							<img
-								ref={mediaElement}
-								className={imgClasses}
-								alt={alt}
-								src={url}
-								style={mediaStyle}
-							/>
-						) : (
-							<div
-								ref={mediaElement}
-								role="img"
-								className={classnames(
-									classes,
-									'wp-block-tzm-section__image-background'
-								)}
-								style={{ backgroundImage, backgroundPosition }}
-							/>
-						))}
-					{url && isVideoBackground && (
-						<video
+				{ resizeListener }
+				<span
+					aria-hidden="true"
+					className={classnames(
+						'wp-block-tzm-section__background',
+						dimRatioToClass(dimRatio),
+						{
+							[overlayColor.class]: overlayColor.class,
+							'has-background-dim': dimRatio !== undefined,
+							'has-background-gradient': gradientValue,
+							[gradientClass]: gradientClass,
+						}
+					)}
+					style={{ backgroundImage: gradientValue, ...bgStyle }}
+				/>
+				{url &&
+					isImageBackground &&
+					(isImgElement ? (
+						<img
 							ref={mediaElement}
-							className="wp-block-tzm-section__video-background"
-							autoPlay
-							muted
-							loop
+							className={imgClasses}
+							alt={alt}
 							src={url}
 							style={mediaStyle}
 						/>
-					)}
-					{isUploadingMedia && <Spinner />}
-				</div>
+					) : (
+						<div
+							ref={mediaElement}
+							role="img"
+							className={classnames(
+								classes,
+								'wp-block-tzm-section__image-background'
+							)}
+							style={{ backgroundImage, backgroundPosition }}
+						/>
+					))}
+				{url && isVideoBackground && (
+					<video
+						ref={mediaElement}
+						className="wp-block-tzm-section__video-background"
+						autoPlay
+						muted
+						loop
+						src={url}
+						style={mediaStyle}
+					/>
+				)}
+				{isUploadingMedia && <Spinner />}
 
 				{!!dividerTop.shape && (
 					<SvgDivider

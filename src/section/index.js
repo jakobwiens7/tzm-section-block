@@ -52,13 +52,17 @@ export const settings = {
 			{
 				name: 'core/paragraph',
 				attributes: {
-					customFontSize: 48,
 					content: __(
 						'<strong>Aim high</strong>',
 						'tzm-section-block'
 					),
 					align: 'center',
-					style: { color: { text: '#fc5b0e' } },
+					style: {
+						typography: {
+							fontSize: 48,
+						},
+						color: { text: '#fc5b0e' }
+					},
 				},
 			},
 		],

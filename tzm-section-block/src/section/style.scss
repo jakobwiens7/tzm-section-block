@@ -6,7 +6,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 1em;
+	//padding: 1em;
 	box-sizing: border-box;
 
 	.has-background-dim:not([class*="-background-color"]) {
@@ -63,11 +63,11 @@
 		}
 
 		&.has-bottom-position {
-			bottom: -2px;
+			bottom: 0;
 		}
 
 		&.has-top-position {
-			top: -2px;
+			top: 0;
 			transform: rotate(180deg);
 
 			&.is-flipped {

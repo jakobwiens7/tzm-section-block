@@ -1,4 +1,3 @@
-/* eslint-disable @wordpress/no-unsafe-wp-apis */
 /**
  * External dependencies
  */
@@ -11,6 +10,8 @@ import { Fragment, useMemo, useState } from '@wordpress/element';
 
 import {
 	BaseControl,
+	Popover,
+	SlotFillProvider,
 	Button,
 	ExternalLink,
 	FocalPointPicker,
@@ -266,12 +267,14 @@ export default function SectionInspectorControls({
 				{/* --- Shape Dividers: Top Color --- */}
 				<ColorPalette
 					className="block-editor-control-color-palette divider-color"
+					__experimentalIsRenderedInSidebar
+					enableAlpha
 					value={dividerTop.color}
 					onChange={(nextColor) => {
 						setAttributes({
 							dividerTop: {
 								...dividerTop,
-								color: nextColor,
+								color: nextColor
 							},
 						});
 					}}
@@ -318,12 +321,14 @@ export default function SectionInspectorControls({
 				{/* --- Shape Dividers: Bottom Color --- */}
 				<ColorPalette
 					className="block-editor-control-color-palette divider-color"
+					__experimentalIsRenderedInSidebar
+					enableAlpha
 					value={dividerBottom.color}
 					onChange={(nextColor) => {
 						setAttributes({
 							dividerBottom: {
 								...dividerBottom,
-								color: nextColor,
+								color: nextColor
 							},
 						});
 					}}
@@ -426,7 +431,7 @@ export default function SectionInspectorControls({
 												)}
 											</ExternalLink>
 											{__(
-												'Leave empty if the image is purely decorative.'
+												'Leave empty if decorative.'
 											)}
 										</>
 									}
@@ -505,7 +510,7 @@ export default function SectionInspectorControls({
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<InspectorControls __experimentalGroup="dimensions">
+			<InspectorControls group="dimensions">
 				{/* --- Dimensions: Minimum height --- */}
 				<ToolsPanelItem
 					hasValue={() => !!minHeight}
@@ -573,70 +578,73 @@ export default function SectionInspectorControls({
 					)}
 				</ToolsPanelItem>
 			</InspectorControls>
-			<InspectorControls __experimentalGroup="color">
-				<ColorGradientSettingsDropdown
-					__experimentalHasMultipleOrigins
-					__experimentalIsRenderedInSidebar
-					settings={[
-						{
-							label: __('Overlay'),
-							colorValue: overlayColor.color,
-							gradientValue,
-							onColorChange: setOverlayColor,
-							onGradientChange: setGradient,
-							isShownByDefault: true,
-							resetAllFilter: () => ( {
-								overlayColor: undefined,
-								customOverlayColor: undefined,
-								gradient: undefined,
-								customGradient: undefined,
-							} ),
-						},
-					]}
-					panelId={ clientId }
-					{ ...colorGradientSettings }
-				/>
-				<ToolsPanelItem
-					hasValue={ () => {
-						// If there's a media background the dimRatio will be
-						// defaulted to 50 whereas it will be 100 for colors.
-						return dimRatio === undefined
-							? false
-							: dimRatio !== ( url ? 50 : 100 );
-					} }
-					label={ __( 'Overlay opacity' ) }
-					onDeselect={ () =>
-						setAttributes( { dimRatio: url ? 50 : 100 } )
-					}
-					resetAllFilter={ () => ( {
-						dimRatio: url ? 50 : 100,
-					} ) }
-					isShownByDefault
-					panelId={ clientId }
-				>
-					<RangeControl
-						label={__('Overlay opacity')}
-						value={dimRatio}
-						onChange={(newDimRatio) =>
-							setAttributes({
-								dimRatio: newDimRatio,
-							})
-						}
-						min={0}
-						max={100}
-						step={10}
-						required
+			{ colorGradientSettings.hasColorsOrGradients && 
+				<InspectorControls group="color">
+					<ColorGradientSettingsDropdown
+						__experimentalHasMultipleOrigins
+						__experimentalIsRenderedInSidebar
+						settings={[
+							{
+								label: __('Overlay'),
+								colorValue: overlayColor.color,
+								gradientValue,
+								onColorChange: setOverlayColor,
+								onGradientChange: setGradient,
+								isShownByDefault: true,
+								resetAllFilter: () => ( {
+									overlayColor: undefined,
+									customOverlayColor: undefined,
+									gradient: undefined,
+									customGradient: undefined,
+								} ),
+							},
+						]}
+						panelId={ clientId }
+						{ ...colorGradientSettings }
 					/>
-				</ToolsPanelItem>
-			</InspectorControls>
-			<InspectorControls __experimentalGroup="advanced">
+					<ToolsPanelItem
+						hasValue={ () => {
+							// If there's a media background the dimRatio will be
+							// defaulted to 50 whereas it will be 100 for colors.
+							return dimRatio === undefined
+								? false
+								: dimRatio !== ( url ? 50 : 100 );
+						} }
+						label={ __( 'Overlay opacity' ) }
+						onDeselect={ () =>
+							setAttributes( { dimRatio: url ? 50 : 100 } )
+						}
+						resetAllFilter={ () => ( {
+							dimRatio: url ? 50 : 100,
+						} ) }
+						isShownByDefault
+						panelId={ clientId }
+					>
+						<RangeControl
+							label={__('Overlay opacity')}
+							value={dimRatio}
+							onChange={(newDimRatio) =>
+								setAttributes({
+									dimRatio: newDimRatio,
+								})
+							}
+							min={0}
+							max={100}
+							step={10}
+							required
+						/>
+					</ToolsPanelItem>
+				</InspectorControls>
+			}
+			<InspectorControls group="advanced">
 				<SelectControl
+					__nextHasNoMarginBottom
 					label={ __( 'HTML element' ) }
 					options={ [
-						{ label: __( 'Default (<div>)' ), value: 'div' },
+						{ label: '<div>', value: 'div' },
 						{ label: '<header>', value: 'header' },
 						{ label: '<main>', value: 'main' },
-						{ label: '<section>', value: 'section' },
+						{ label: __( 'Default (<section>)', 'tzm-section-block' ), value: 'section' },
 						{ label: '<article>', value: 'article' },
 						{ label: '<aside>', value: 'aside' },
 						{ label: '<footer>', value: 'footer' },

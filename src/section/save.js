@@ -141,49 +141,48 @@ export default function save({ attributes }) {
 				)}
 				style={bgStyle}
 			/>
-			<div className={"wp-block-tzm-section__background-wrapper"}>
-				{!useFeaturedImage &&
-					isImageBackground &&
-					url &&
-					(isImgElement ? (
-						<img
-							className={imgClasses}
-							alt={alt}
-							src={url}
-							style={{ objectPosition }}
-							data-object-fit="cover"
-							data-object-position={objectPosition}
-						/>
-					) : (
-						<div
-							role="img"
-							className={imgClasses}
-							style={{ backgroundPosition, backgroundImage }}
-							data-img-size={
-								parallaxMode && isRepeated ? 'auto' : undefined
-							}
-							data-img-repeat={
-								parallaxMode && isRepeated ? 'repeat' : undefined
-							}
-						/>
-					))}
-				{isVideoBackground && url && !parallaxMode && (
-					<video
-						className={classnames(
-							'wp-block-tzm-section__video-background',
-							'intrinsic-ignore'
-						)}
-						autoPlay
-						muted
-						loop
-						playsInline
+
+			{!useFeaturedImage &&
+				isImageBackground &&
+				url &&
+				(isImgElement ? (
+					<img
+						className={imgClasses}
+						alt={alt}
 						src={url}
 						style={{ objectPosition }}
 						data-object-fit="cover"
 						data-object-position={objectPosition}
 					/>
-				)}
-			</div>
+				) : (
+					<div
+						role="img"
+						className={imgClasses}
+						style={{ backgroundPosition, backgroundImage }}
+						data-img-size={
+							parallaxMode && isRepeated ? 'auto' : undefined
+						}
+						data-img-repeat={
+							parallaxMode && isRepeated ? 'repeat' : undefined
+						}
+					/>
+				))}
+			{isVideoBackground && url && !parallaxMode && (
+				<video
+					className={classnames(
+						'wp-block-tzm-section__video-background',
+						'intrinsic-ignore'
+					)}
+					autoPlay
+					muted
+					loop
+					playsInline
+					src={url}
+					style={{ objectPosition }}
+					data-object-fit="cover"
+					data-object-position={objectPosition}
+				/>
+			)}
 
 			{!!dividerTop.shape && (
 				<SvgDivider

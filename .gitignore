@@ -1,4 +1,5 @@
-/node_modules
 /tzm-section-block
+/node_modules
 /package-lock.json
 /.eslintrc
+/.vscode
