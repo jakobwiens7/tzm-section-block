@@ -1,5 +1,3 @@
-//@import '~@wordpress/base-styles/variables';
-
 .wp-block-tzm-section {
 	/* Extra specificity needed because the reset.css applied in the editor context is overriding this rule. */
 	.editor-styles-wrapper & {
@@ -73,86 +71,41 @@
 	.block-editor-panel-divider {
 		// Shape preview
 		.component-color-indicator {
-			width: 32px;
+			width: 36px;
 			margin: -4px 4px;
 			border-radius: 0;
-		}
 
-		// Panel Title
-		.components-panel__body-title {
-			.divider-flipped.preview:after {
-				transform: scaleX(-1);
+			&:has(svg) {
+				background: #fff;
 			}
 
-			.indicator-divider-top.preview:after {
-				transform: rotate(180deg);
-			}
-
-			.indicator-divider-top.divider-flipped.preview:after {
-				transform: rotate(180deg) scaleX(-1);
+			svg {
+				display: block;
 			}
 		}
 
-		// Select Control
-		.components-custom-select-control {
-			margin-bottom: 12px;
-
-			> button {
-				width: 100%;
+		// ComboboxControl
+		.components-combobox-control {
+			.components-form-token-field__suggestions-list {
+				max-height: 40vh;
+				min-height: 200px;
 			}
-
-			.components-custom-select-control__item {
-				margin: 0;
-				border-bottom: 1px solid #ccc;
-
-				&:last-child {
-					border-bottom: none;
-				}
-			}
-
-			.preview {
-				&:after {
-					z-index: -1;
-					opacity: 0.25;
-				}
-
-				&.is-highlighted {
-					background-color: transparent;
-
-					&:after {
-						opacity: 1;
-					}
-				}
-			}
-
-			&.divider-flipped .preview:after {
-				transform: scaleX(-1);
-			}
-
-			&.control-divider-top-shape .preview:after {
-				transform: rotate(180deg);
-			}
-
-			&.control-divider-top-shape.divider-flipped .preview:after {
-				transform: rotate(180deg) scaleX(-1);
+			.components-form-token-field__suggestion[aria-disabled="true"] {
+				border-top: 1px solid lightgray;
+				background-color: #eee;
 			}
 		}
 
-		// Common Shape Preview
-		.preview {
-			position: relative;
-			float: none;
-
-			&:after {
-				content: "";
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-			}
+		.is-flipped svg {
+			transform: scaleX(-1);
 		}
 
-		@import "editor-dividers.scss";
+		.is-top-position svg {
+			transform: rotate(180deg);
+		}
+
+		.is-top-position.is-flipped svg {
+			transform: rotate(180deg) scaleX(-1);
+		}
 	}
 }
