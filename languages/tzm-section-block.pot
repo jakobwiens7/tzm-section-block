@@ -1,18 +1,23 @@
 # Copyright (C) 2025 TezmoMedia - Jakob Wiens
 # This file is distributed under the GPL-2.0-or-later.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: TZM Section Block 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tzm-section-block\n"
+"Project-Id-Version: TZM Section Block 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tzm-section-"
+"block\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-25T17:00:10+01:00\n"
+"POT-Creation-Date: 2025-01-31 18:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Domain: tzm-section-block\n"
+"\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
 
 #. Plugin Name of the plugin
 #: tzm-section-block.php
@@ -21,7 +26,9 @@ msgstr ""
 
 #. Description of the plugin
 #: tzm-section-block.php
-msgid "Wrap your content in a versatile section block - great for impressive sections with eye-catching features like parallax effects and shape dividers."
+msgid ""
+"Wrap your content in a versatile section block - great for impressive "
+"sections with eye-catching features like parallax effects and shape dividers."
 msgstr ""
 
 #. Author of the plugin
@@ -34,276 +41,363 @@ msgstr ""
 msgid "https://www.tezmo.media"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:152
-msgid "- Disabled -"
-msgstr ""
-
-#: build/tzm-section-block.js:1
-#: src/_shared.js:156
+#: build/tzm-section-block.js:1 src/_dividers.js:15
+#: build/tzm-section-block.js:525
 msgid "Tilt"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:167
+#: build/tzm-section-block.js:1 src/_dividers.js:20
+#: build/tzm-section-block.js:530
 msgid "Tilt double"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:182
-msgid "Small triangle In"
+#: build/tzm-section-block.js:1 src/_dividers.js:25
+#: build/tzm-section-block.js:535
+msgid "Tilt crossing"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:195
-msgid "Small triangle Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:30
+#: build/tzm-section-block.js:540
+msgid "Small triangle in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:208
-msgid "Big triangle In"
+#: build/tzm-section-block.js:1 src/_dividers.js:35
+#: build/tzm-section-block.js:545
+msgid "Small triangle out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:219
-msgid "Big triangle Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:40
+#: build/tzm-section-block.js:550
+msgid "Big triangle in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:230
-msgid "Offset triangle In"
+#: build/tzm-section-block.js:1 src/_dividers.js:45
+#: build/tzm-section-block.js:555
+msgid "Big triangle out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:241
-msgid "Offset triangle Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:50
+#: build/tzm-section-block.js:560
+msgid "Offset triangle in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:252
+#: build/tzm-section-block.js:1 src/_dividers.js:55
+#: build/tzm-section-block.js:565
+msgid "Offset triangle out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:60
+#: build/tzm-section-block.js:570
 msgid "Sawtooth"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:265
+#: build/tzm-section-block.js:1 src/_dividers.js:65
+#: build/tzm-section-block.js:575
 msgid "Small zigzag"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:278
+#: build/tzm-section-block.js:1 src/_dividers.js:70
+#: build/tzm-section-block.js:580
 msgid "Zigzag"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:291
+#: build/tzm-section-block.js:1 src/_dividers.js:75
+#: build/tzm-section-block.js:585
 msgid "Spikes"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:304
+#: build/tzm-section-block.js:1 src/_dividers.js:80
+#: build/tzm-section-block.js:590
 msgid "Blocks"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:317
-msgid "Half-circle In"
+#: build/tzm-section-block.js:1 src/_dividers.js:85
+#: build/tzm-section-block.js:595
+msgid "Curve in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:330
-msgid "Half-circle Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:90
+#: build/tzm-section-block.js:600
+msgid "Curve out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:343
-msgid "Curve In"
+#: build/tzm-section-block.js:1 src/_dividers.js:95
+#: build/tzm-section-block.js:605
+msgid "Offset curve in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:356
-msgid "Curve Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:100
+#: build/tzm-section-block.js:610
+msgid "Offset curve out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:369
-msgid "Asymmetric curve In"
+#: build/tzm-section-block.js:1 src/_dividers.js:105
+#: build/tzm-section-block.js:615
+msgid "Curves"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:382
-msgid "Asymmetric curve Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:110
+#: build/tzm-section-block.js:620
+msgid "Curves double"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:395
-msgid "Double curve"
+#: build/tzm-section-block.js:1 src/_dividers.js:115
+#: build/tzm-section-block.js:625
+msgid "Small curve in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:415
+#: build/tzm-section-block.js:1 src/_dividers.js:120
+#: build/tzm-section-block.js:630
+msgid "Small curve out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:125
+#: build/tzm-section-block.js:635
+msgid "Half circle in"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:130
+#: build/tzm-section-block.js:640
+msgid "Half circle out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:135
+#: build/tzm-section-block.js:645
 msgid "Waves"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:428
-msgid "Rounded In"
+#: build/tzm-section-block.js:1 src/_dividers.js:140
+#: build/tzm-section-block.js:650
+msgid "Rounded in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:441
-msgid "Rounded Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:145
+#: build/tzm-section-block.js:655
+msgid "Rounded out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:454
-msgid "Split In"
+#: build/tzm-section-block.js:1 src/_dividers.js:150
+#: build/tzm-section-block.js:660
+msgid "Book in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:467
-msgid "Split Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:155
+#: build/tzm-section-block.js:665
+msgid "Book out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:480
-msgid "Book In"
+#: build/tzm-section-block.js:1 src/_dividers.js:160
+#: build/tzm-section-block.js:670
+msgid "Split in"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:493
-msgid "Book Out"
+#: build/tzm-section-block.js:1 src/_dividers.js:165
+#: build/tzm-section-block.js:675
+msgid "Split out"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:506
-msgid "Paint"
-msgstr ""
-
-#: build/tzm-section-block.js:1
-#: src/_shared.js:519
-msgid "Ragged"
-msgstr ""
-
-#: build/tzm-section-block.js:1
-#: src/_shared.js:532
+#: build/tzm-section-block.js:1 src/_dividers.js:170
+#: build/tzm-section-block.js:680
 msgid "Clouds"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/_shared.js:599
-msgid "Handdrawn"
+#: build/tzm-section-block.js:1 src/_dividers.js:175
+#: build/tzm-section-block.js:685
+msgid "Ragged"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:199
+#: build/tzm-section-block.js:1 src/_dividers.js:180
+#: build/tzm-section-block.js:690
+msgid "Drawn A"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:185
+#: build/tzm-section-block.js:695
+msgid "Drawn B"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:190
+#: build/tzm-section-block.js:700
+msgid "Dripping in"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:195
+#: build/tzm-section-block.js:705
+msgid "Dripping out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:200
+#: build/tzm-section-block.js:710
+msgid "Bite in"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:205
+#: build/tzm-section-block.js:715
+msgid "Bite out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:210
+#: build/tzm-section-block.js:720
+msgid "Mountains in"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:215
+#: build/tzm-section-block.js:725
+msgid "Mountains out"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:220
+msgid "Speech bubble"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:237
+#: build/tzm-section-block.js:749
+msgid "Linear shapes:"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:239
+#: build/tzm-section-block.js:751
+msgid "Curved shapes:"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/_dividers.js:241
+#: build/tzm-section-block.js:753
+msgid "Special shapes:"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:206
+#: build/tzm-section-block.js:2308
 msgid "Shape Dividers"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:202
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:209
+#: build/tzm-section-block.js:2311
 msgid "Top shape:"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:218
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:210
+#: build/tzm-section-block.js:2312
+msgid "No top shape selected"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:225
+#: build/tzm-section-block.js:2326
 msgid "Bottom shape:"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:367
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:226
+#: build/tzm-section-block.js:2327
+msgid "No bottom shape selected"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:395
+#: build/tzm-section-block.js:2494
 msgid "Image Parallax"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:368
-msgid "Note: Parallax effects are currently visible only on the frontend of your website and won’t be previewed in the Block Editor."
-msgstr ""
-
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:376
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:401
+#: build/tzm-section-block.js:2503
 msgid "- No parallax -"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:383
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:408
+#: build/tzm-section-block.js:2510
 msgid "Fixed"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:387
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:412
+#: build/tzm-section-block.js:2514
 msgid "Parallax (slow)"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:394
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:419
+#: build/tzm-section-block.js:2521
 msgid "Parallax (medium)"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:401
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:426
+#: build/tzm-section-block.js:2528
 msgid "Parallax (fast)"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:481
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:503
+#: build/tzm-section-block.js:2608
 msgid "Top"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:257
-#: src/edit/inspector-controls.js:319
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:272
+#: src/edit/inspector-controls.js:335 build/tzm-section-block.js:2370
+msgid "- Disabled -"
+msgstr ""
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:284
+#: src/edit/inspector-controls.js:347 build/tzm-section-block.js:2384
+#: build/tzm-section-block.js:2446
 msgid "Flip divider shape"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:281
-#: src/edit/inspector-controls.js:343
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:308
+#: src/edit/inspector-controls.js:371 build/tzm-section-block.js:2408
+#: build/tzm-section-block.js:2470
 msgid "Divider height"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:487
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:509
+#: build/tzm-section-block.js:2614
 msgid "Bottom"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:556
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:578
+#: build/tzm-section-block.js:2683
 msgid "CSS selector"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:557
-msgid "Specify an element whose height will be subtracted from the full-height section (e.g., 'header', '#navigation', or '.primary-menu')."
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:579
+#: build/tzm-section-block.js:2684
+msgid ""
+"Specify an element whose height will be subtracted from the full-height "
+"section (e.g., 'header', '#navigation', or '.primary-menu')."
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:631
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:653
+#: build/tzm-section-block.js:2758
 msgid "Default (<section>)"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:644
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:666
+#: build/tzm-section-block.js:2771
 msgid "Vertical clipping"
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/edit/inspector-controls.js:645
-msgid "Enable to clip the content at the top and bottom edges of the section. Please note that this feature may not be supported in all browsers."
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:667
+#: build/tzm-section-block.js:2772
+msgid ""
+"Enable to clip the content at the top and bottom edges of the section. "
+"Please note that this feature may not be supported in all browsers."
 msgstr ""
 
-#: build/tzm-section-block.js:1
-#: src/tzm-section-block.js:67
+#: build/tzm-section-block.js:1 src/tzm-section-block.js:68
+msgid "Because <strong>every story</strong> needs a section."
+msgstr ""
+
+#: build/tzm-section-block.js:2495
+msgid ""
+"Note: Parallax effects are currently visible only on the frontend of your "
+"website and won’t be previewed in the Block Editor."
+msgstr ""
+
+#: build/tzm-section-block.js:3522
 msgid "<strong>Aim high</strong>"
 msgstr ""
 
-#: build/block.json
-#: src/block.json
+#: build/block.json src/block.json
 msgctxt "block title"
 msgid "Section"
 msgstr ""
 
-#: build/block.json
-#: src/block.json
+#: build/block.json src/block.json
 msgctxt "block description"
-msgid "Display your content in a section block - great for eye-catching headers and sections."
+msgid ""
+"Display your content in a section block - great for eye-catching headers and "
+"sections."
 msgstr ""

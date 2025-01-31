@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tzm-section-"
 "block\n"
 "POT-Creation-Date: 2021-03-24T14:53:25+01:00\n"
-"PO-Revision-Date: 2025-01-25 16:01+0000\n"
+"PO-Revision-Date: 2025-01-31 18:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -18,33 +18,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Loco-Version: 2.6.2; wp-6.0"
 
-#: build/tzm-section-block.js:1 src/_shared.js:152
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:272
+#: src/edit/inspector-controls.js:335 build/tzm-section-block.js:2370
 msgid "- Disabled -"
 msgstr "- Deaktiviert -"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:376
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:401
+#: build/tzm-section-block.js:2503
 msgid "- No parallax -"
 msgstr "- Kein Parallax -"
 
-#: build/tzm-section-block.js:1 src/tzm-section-block.js:67
+#: build/tzm-section-block.js:3522
 msgid "<strong>Aim high</strong>"
 msgstr "Hoch hinaus"
 
-#: build/tzm-section-block.js:1 src/_shared.js:369
-msgid "Asymmetric curve In"
-msgstr "Asymmetrische Kurve innen"
+#: build/tzm-section-block.js:1 src/tzm-section-block.js:68
+msgid "Because <strong>every story</strong> needs a section."
+msgstr "Denn <strong>jede Geschichte</strong> braucht einen Abschnitt."
 
-#: build/tzm-section-block.js:1 src/_shared.js:382
-msgid "Asymmetric curve Out"
-msgstr "Asymmetrische Kurve außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:40
+#: build/tzm-section-block.js:550
+#| msgid "Big triangle In"
+msgid "Big triangle in"
+msgstr "Großes Dreieck rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:208
-msgid "Big triangle In"
-msgstr "Großes Dreieck innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:45
+#: build/tzm-section-block.js:555
+#| msgid "Big triangle Out"
+msgid "Big triangle out"
+msgstr "Großes Dreieck raus"
 
-#: build/tzm-section-block.js:1 src/_shared.js:219
-msgid "Big triangle Out"
-msgstr "Großes Dreieck außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:200
+#: build/tzm-section-block.js:710
+msgid "Bite in"
+msgstr "Biss rein"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:205
+#: build/tzm-section-block.js:715
+msgid "Bite out"
+msgstr "Biss raus"
 
 #: build/block.json src/block.json
 msgctxt "block description"
@@ -60,56 +72,103 @@ msgctxt "block title"
 msgid "Section"
 msgstr "Sektion"
 
-#: build/tzm-section-block.js:1 src/_shared.js:304
+#: build/tzm-section-block.js:1 src/_dividers.js:80
+#: build/tzm-section-block.js:590
 msgid "Blocks"
 msgstr "Blöcke"
 
-#: build/tzm-section-block.js:1 src/_shared.js:480
-msgid "Book In"
-msgstr "Buch innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:150
+#: build/tzm-section-block.js:660
+#| msgid "Book In"
+msgid "Book in"
+msgstr "Buch rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:493
-msgid "Book Out"
-msgstr "Buch außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:155
+#: build/tzm-section-block.js:665
+#| msgid "Book Out"
+msgid "Book out"
+msgstr "Buch raus"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:487
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:509
+#: build/tzm-section-block.js:2614
 msgid "Bottom"
 msgstr "Unten"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:218
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:225
+#: build/tzm-section-block.js:2326
 msgid "Bottom shape:"
 msgstr "Untere Form:"
 
-#: build/tzm-section-block.js:1 src/_shared.js:532
+#: build/tzm-section-block.js:1 src/_dividers.js:170
+#: build/tzm-section-block.js:680
 msgid "Clouds"
 msgstr "Wolken"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:556
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:578
+#: build/tzm-section-block.js:2683
 msgid "CSS selector"
 msgstr "CSS-Selektor"
 
-#: build/tzm-section-block.js:1 src/_shared.js:343
-msgid "Curve In"
-msgstr "Kurve innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:85
+#: build/tzm-section-block.js:595
+#| msgid "Curve In"
+msgid "Curve in"
+msgstr "Kurve rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:356
-msgid "Curve Out"
-msgstr "Kurve außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:90
+#: build/tzm-section-block.js:600
+#| msgid "Curve Out"
+msgid "Curve out"
+msgstr "Kurve raus"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:631
+#: build/tzm-section-block.js:1 src/_dividers.js:239
+#: build/tzm-section-block.js:751
+msgid "Curved shapes:"
+msgstr "Runde Formen:"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:105
+#: build/tzm-section-block.js:615
+msgid "Curves"
+msgstr "Kurven"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:110
+#: build/tzm-section-block.js:620
+msgid "Curves double"
+msgstr "Kurven doppelt"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:653
+#: build/tzm-section-block.js:2758
 msgid "Default (<section>)"
 msgstr "Standard (<section>)"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:281
-#: src/edit/inspector-controls.js:343
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:308
+#: src/edit/inspector-controls.js:371 build/tzm-section-block.js:2408
+#: build/tzm-section-block.js:2470
 msgid "Divider height"
 msgstr "Trennform-Höhe"
 
-#: build/tzm-section-block.js:1 src/_shared.js:395
-msgid "Double curve"
-msgstr "Doppelkurve"
+#: build/tzm-section-block.js:1 src/_dividers.js:180
+#: build/tzm-section-block.js:690
+msgid "Drawn A"
+msgstr "Gemalt A"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:645
+#: build/tzm-section-block.js:1 src/_dividers.js:185
+#: build/tzm-section-block.js:695
+msgid "Drawn B"
+msgstr "Gemalt B"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:190
+#: build/tzm-section-block.js:700
+msgid "Dripping in"
+msgstr "Tropfend rein"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:195
+#: build/tzm-section-block.js:705
+msgid "Dripping out"
+msgstr "Tropfend raus"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:667
+#: build/tzm-section-block.js:2772
 msgid ""
 "Enable to clip the content at the top and bottom edges of the section. "
 "Please note that this feature may not be supported in all browsers."
@@ -118,37 +177,65 @@ msgstr ""
 "abzuschneiden. Bitte beachten Sie, dass diese Funktion möglicherweise nicht "
 "von allen Browsern unterstützt wird."
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:383
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:408
+#: build/tzm-section-block.js:2510
 msgid "Fixed"
 msgstr "Fixiert"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:257
-#: src/edit/inspector-controls.js:319
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:284
+#: src/edit/inspector-controls.js:347 build/tzm-section-block.js:2384
+#: build/tzm-section-block.js:2446
 msgid "Flip divider shape"
 msgstr "Trennform spiegeln"
 
-#: build/tzm-section-block.js:1 src/_shared.js:317
-msgid "Half-circle In"
-msgstr "Halbkreis innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:125
+#: build/tzm-section-block.js:635
+#| msgid "Half-circle In"
+msgid "Half circle in"
+msgstr "Halbkreis rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:330
-msgid "Half-circle Out"
-msgstr "Halbkreis außen"
-
-#: build/tzm-section-block.js:1 src/_shared.js:599
-msgid "Handdrawn"
-msgstr "Handgemalt"
+#: build/tzm-section-block.js:1 src/_dividers.js:130
+#: build/tzm-section-block.js:640
+#| msgid "Half-circle Out"
+msgid "Half circle out"
+msgstr "Halbkreis raus"
 
 #. Author URI of the plugin
 #: tzm-section-block.php
 msgid "https://www.tezmo.media"
 msgstr "https://www.tezmo.media"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:367
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:395
+#: build/tzm-section-block.js:2494
 msgid "Image Parallax"
 msgstr "Bild-Parallax"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:368
+#: build/tzm-section-block.js:1 src/_dividers.js:237
+#: build/tzm-section-block.js:749
+msgid "Linear shapes:"
+msgstr "Lineare Formen:"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:210
+#: build/tzm-section-block.js:720
+msgid "Mountains in"
+msgstr "Berge rein"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:215
+#: build/tzm-section-block.js:725
+msgid "Mountains out"
+msgstr "Berge raus"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:226
+#: build/tzm-section-block.js:2327
+msgid "No bottom shape selected"
+msgstr "Keine untere Form ausgewählt"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:210
+#: build/tzm-section-block.js:2312
+msgid "No top shape selected"
+msgstr "Keine obere Form ausgewählt"
+
+#: build/tzm-section-block.js:2495
 msgid ""
 "Note: Parallax effects are currently visible only on the frontend of your "
 "website and won’t be previewed in the Block Editor."
@@ -156,64 +243,105 @@ msgstr ""
 "Hinweis: Parallax-Effekte sind derzeit nur im Frontend Ihrer Website "
 "sichtbar und werden im Block-Editor nicht angewendet."
 
-#: build/tzm-section-block.js:1 src/_shared.js:230
-msgid "Offset triangle In"
-msgstr "Versetztes Dreieck innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:95
+#: build/tzm-section-block.js:605
+msgid "Offset curve in"
+msgstr "Versetzte Kurve rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:241
-msgid "Offset triangle Out"
-msgstr "Versetztes Dreieck außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:100
+#: build/tzm-section-block.js:610
+msgid "Offset curve out"
+msgstr "Versetzte Kurve raus"
 
-#: build/tzm-section-block.js:1 src/_shared.js:506
-msgid "Paint"
-msgstr "Farbe"
+#: build/tzm-section-block.js:1 src/_dividers.js:50
+#: build/tzm-section-block.js:560
+#| msgid "Offset triangle In"
+msgid "Offset triangle in"
+msgstr "Versetztes Dreieck rein"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:401
+#: build/tzm-section-block.js:1 src/_dividers.js:55
+#: build/tzm-section-block.js:565
+#| msgid "Offset triangle Out"
+msgid "Offset triangle out"
+msgstr "Versetztes Dreieck raus"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:426
+#: build/tzm-section-block.js:2528
 msgid "Parallax (fast)"
 msgstr "Parallax (schnell)"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:394
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:419
+#: build/tzm-section-block.js:2521
 msgid "Parallax (medium)"
 msgstr "Parallax (medium)"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:387
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:412
+#: build/tzm-section-block.js:2514
 #| msgid "Parallax (slow)"
 msgid "Parallax (slow)"
 msgstr "Parallax (langsam)"
 
-#: build/tzm-section-block.js:1 src/_shared.js:519
+#: build/tzm-section-block.js:1 src/_dividers.js:175
+#: build/tzm-section-block.js:685
 msgid "Ragged"
 msgstr "Zerrissen"
 
-#: build/tzm-section-block.js:1 src/_shared.js:428
-msgid "Rounded In"
-msgstr "Gerundet innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:140
+#: build/tzm-section-block.js:650
+#| msgid "Rounded In"
+msgid "Rounded in"
+msgstr "Gerundet rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:441
-msgid "Rounded Out"
-msgstr "Gerundet außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:145
+#: build/tzm-section-block.js:655
+#| msgid "Rounded Out"
+msgid "Rounded out"
+msgstr "Gerundet raus"
 
-#: build/tzm-section-block.js:1 src/_shared.js:252
+#: build/tzm-section-block.js:1 src/_dividers.js:60
+#: build/tzm-section-block.js:570
 msgid "Sawtooth"
 msgstr "Sägezahn"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:199
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:206
+#: build/tzm-section-block.js:2308
 msgid "Shape Dividers"
 msgstr "Trennformen"
 
-#: build/tzm-section-block.js:1 src/_shared.js:182
-msgid "Small triangle In"
-msgstr "Kleines Dreieck innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:115
+#: build/tzm-section-block.js:625
+msgid "Small curve in"
+msgstr "Kleine Kurve rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:195
-msgid "Small triangle Out"
-msgstr "Kleines Dreieck außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:120
+#: build/tzm-section-block.js:630
+msgid "Small curve out"
+msgstr "Kleine Kurve raus"
 
-#: build/tzm-section-block.js:1 src/_shared.js:265
+#: build/tzm-section-block.js:1 src/_dividers.js:30
+#: build/tzm-section-block.js:540
+#| msgid "Small triangle In"
+msgid "Small triangle in"
+msgstr "Kleines Dreieck rein"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:35
+#: build/tzm-section-block.js:545
+#| msgid "Small triangle Out"
+msgid "Small triangle out"
+msgstr "Kleines Dreieck raus"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:65
+#: build/tzm-section-block.js:575
 msgid "Small zigzag"
 msgstr "Kleiner Zickzack"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:557
+#: build/tzm-section-block.js:1 src/_dividers.js:241
+#: build/tzm-section-block.js:753
+msgid "Special shapes:"
+msgstr "Besondere Formen:"
+
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:579
+#: build/tzm-section-block.js:2684
 msgid ""
 "Specify an element whose height will be subtracted from the full-height "
 "section (e.g., 'header', '#navigation', or '.primary-menu')."
@@ -221,36 +349,54 @@ msgstr ""
 "Geben Sie ein Element an, dessen Höhe von der Vollbild-Sektion abgezogen "
 "wird (z.B. 'header', '#navigation' oder '.primary-menu')."
 
-#: build/tzm-section-block.js:1 src/_shared.js:291
+#: build/tzm-section-block.js:1 src/_dividers.js:220
+msgid "Speech bubble"
+msgstr "Sprechblase"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:75
+#: build/tzm-section-block.js:585
 msgid "Spikes"
 msgstr "Spitzen"
 
-#: build/tzm-section-block.js:1 src/_shared.js:454
-msgid "Split In"
-msgstr "Geteilt innen"
+#: build/tzm-section-block.js:1 src/_dividers.js:160
+#: build/tzm-section-block.js:670
+#| msgid "Split In"
+msgid "Split in"
+msgstr "Geteilt rein"
 
-#: build/tzm-section-block.js:1 src/_shared.js:467
-msgid "Split Out"
-msgstr "Geteilt außen"
+#: build/tzm-section-block.js:1 src/_dividers.js:165
+#: build/tzm-section-block.js:675
+#| msgid "Split Out"
+msgid "Split out"
+msgstr "Geteilt raus"
 
 #. Author of the plugin
 #: tzm-section-block.php
 msgid "TezmoMedia - Jakob Wiens"
 msgstr "TezmoMedia - Jakob Wiens"
 
-#: build/tzm-section-block.js:1 src/_shared.js:156
+#: build/tzm-section-block.js:1 src/_dividers.js:15
+#: build/tzm-section-block.js:525
 msgid "Tilt"
 msgstr "Neigung"
 
-#: build/tzm-section-block.js:1 src/_shared.js:167
+#: build/tzm-section-block.js:1 src/_dividers.js:25
+#: build/tzm-section-block.js:535
+msgid "Tilt crossing"
+msgstr "Neigung kreuzend"
+
+#: build/tzm-section-block.js:1 src/_dividers.js:20
+#: build/tzm-section-block.js:530
 msgid "Tilt double"
 msgstr "Neigung doppelt"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:481
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:503
+#: build/tzm-section-block.js:2608
 msgid "Top"
 msgstr "Oben"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:202
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:209
+#: build/tzm-section-block.js:2311
 msgid "Top shape:"
 msgstr "Obere Form:"
 
@@ -259,11 +405,13 @@ msgstr "Obere Form:"
 msgid "TZM Section Block"
 msgstr "TZM Sektions-Block"
 
-#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:644
+#: build/tzm-section-block.js:1 src/edit/inspector-controls.js:666
+#: build/tzm-section-block.js:2771
 msgid "Vertical clipping"
 msgstr "Vertikales Trimmen"
 
-#: build/tzm-section-block.js:1 src/_shared.js:415
+#: build/tzm-section-block.js:1 src/_dividers.js:135
+#: build/tzm-section-block.js:645
 msgid "Waves"
 msgstr "Wellen"
 
@@ -281,6 +429,7 @@ msgstr ""
 "anspruchsvolle Header und Sektionen mit beeindruckenden Parallax-Effekten "
 "und Trennformen."
 
-#: build/tzm-section-block.js:1 src/_shared.js:278
+#: build/tzm-section-block.js:1 src/_dividers.js:70
+#: build/tzm-section-block.js:580
 msgid "Zigzag"
 msgstr "Zickzack"
