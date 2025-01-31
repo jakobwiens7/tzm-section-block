@@ -35,10 +35,6 @@ $white: #fff;
 		background-color: transparent;
 	}
 
-	> * {
-		border-radius: inherit;
-	}
-
 	&.has-parallax {
 		background-attachment: fixed;
 
@@ -147,8 +143,19 @@ $white: #fff;
 		justify-content: center;
 	}
 
-	.wp-block-tzm-section__background {
+	> .wp-block-tzm-section__background {
 		z-index: 1;
+		border-radius: inherit;
+	}
+
+	.wp-block-tzm-section__image-background {
+		&.is-repeated {
+			background-repeat: repeat;
+			background-size: auto;
+		}
+		&.has-parallax-fixed {
+			background-attachment: fixed;
+		}
 	}
 
 	// Extra specificity for in edit mode where other styles would override it otherwise.
@@ -176,7 +183,6 @@ $white: #fff;
 // based on if overlay is light or not. The following styles leverage
 // `:where` to allow for generic global styles that have a low specificity to
 // still take precedence.
-
 :where(.wp-block-tzm-section:not(.has-text-color)),
 :where(.wp-block-tzm-section-image:not(.has-text-color)) {
 	color: $white;
@@ -199,18 +205,41 @@ $white: #fff;
 	}
 }
 
-// Parallax / Jarallax styles
-[class*="has-parallax-"] {
+/*.u1-parallax-bg-stage {
 	position: relative;
+	// prevent margin collapse on inner element
+	display: flow-root;
+	// needed? else the parallax-element will go behinde everithing with a stackingcontext?
 	z-index: 0;
+}
+@supports not (display: flow-root) {
+	// zzz if safari
+	.u1-parallax-bg-stage {
+		padding: 0.2px;
+	}
+}*/
 
-	> .jarallax-img {
-		position: absolute;
-		object-fit: cover;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
+parallax-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	right: -0.4px;
+	bottom: -0.3px; /* ugly strange 1px space see demo */
+	z-index: -1;
+	will-change: transform;
+	background-size: cover;
+
+	&.has-parallax-fixed {
+		--parallax-bg-speed: 0;
+	}
+	&.has-parallax-slow {
+		--parallax-bg-speed: 0.3;
+	}
+	&.has-parallax-medium {
+		--parallax-bg-speed: 0.7;
+	}
+	&.has-parallax-fast {
+		--parallax-bg-speed: 1.25;
 	}
 }
