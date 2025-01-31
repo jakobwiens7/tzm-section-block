@@ -174,8 +174,8 @@
 			"allowJustification": false
 		}
 	},
-	"editorScript": "file:./tzm-section-block.js",
-	"editorStyle": "file:./tzm-section-block.css",
-	"style": "file:./style-tzm-section-block.css",
-	"viewScript": "file:./view-tzm-section-block.js"
+	"editorScript": "tzm-section-block-editor",
+	"editorStyle": "tzm-section-block-editor",
+	"style": "style-tzm-section-block",
+	"script": "view-tzm-section-block"
 }

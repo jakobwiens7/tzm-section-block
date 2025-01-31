@@ -54,26 +54,25 @@ registerBlockType( metadata.name, {
 	icon,
 	example: {
 		attributes: {
-			customOverlayColor: '#ffffff',
-			dimRatio: 20,
-			url: 'https://picsum.photos/id/1056/600/400',
-			dividerTop: { shape: 'double-curve', color: '#ffffff', height: 10 },
-			dividerBottom: { shape: 'double-curve', color: '#ffffff', height: 10 },
+			minHeight: 240,
+			isUserOverlayColor: true,
+			customGradient: 'linear-gradient(200deg,rgb(20,150,220) 0%,rgb(65,225,220) 70%)',
+			dimRatio: 100,
+			dividerTop: { shape: 'clouds', color: '#ffffff', height: 12 },
+			dividerBottom: { shape: 'mountains-in', color: '#317BA8', height: 15 },
 		},
 		innerBlocks: [
 			{
 				name: 'core/paragraph',
 				attributes: {
 					content: __(
-						'<strong>Aim high</strong>',
+						'Because <strong>every story</strong> needs a section.',
 						'tzm-section-block'
 					),
 					align: 'center',
 					style: {
-						typography: {
-							fontSize: 48,
-						},
-						color: { text: '#fc5b0e' },
+						typography: { fontSize: '2rem' },
+						color: { text: '#111111' },
 					},
 				},
 			},

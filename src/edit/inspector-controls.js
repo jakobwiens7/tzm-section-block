@@ -22,7 +22,8 @@ import {
 	TextareaControl,
 	ToggleControl,
 	SelectControl,
-	CustomSelectControl,
+	//CustomSelectControl,
+	ComboboxControl,
 	__experimentalUseCustomUnits as useCustomUnits,
 	//__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
@@ -48,14 +49,20 @@ import { __ } from '@wordpress/i18n';
  */
 import {
 	SECTION_MIN_HEIGHT,
-	mediaPosition,
-	SVG_SHAPE_OPTIONS,
-	getDividerItem,
+	mediaPosition
 } from '../_shared';
 
 import {
 	cleanEmptyObject
  } from '../_utils';
+
+import { 
+	shapeData, 
+	dividerShapeOptions,
+	SvgDivider
+} from '../_dividers';
+
+
 
 const htmlElementMessages = {
 	header: __("The <header> element should represent introductory content, typically a group of introductory or navigational aids."),
@@ -198,62 +205,82 @@ export default function SectionInspectorControls( {
 		<span className="block-editor-panel-divider__panel-title">
 			{ __( 'Shape Dividers', 'tzm-section-block' ) }
 			<span
-				aria-label={
-					__( 'Top shape:', 'tzm-section-block' ) +
-					' ' +
-					getDividerItem( dividerTop.shape, 'name' )
+				aria-label={ dividerTop.shape 
+					? __( 'Top shape:', 'tzm-section-block' ) + ' ' +	shapeData[dividerTop.shape]?.name 
+					: __( 'No top shape selected', 'tzm-section-block' )
 				}
-				className={ clsx(
-					'component-color-indicator',
-					'indicator-divider-top',
-					{
-						[ getDividerItem( dividerTop.shape, 'className' ) ]:
-							getDividerItem( dividerTop.shape, 'className' ),
-						'divider-flipped': dividerTop.flipped,
+				className={ clsx( 'component-color-indicator',
+					'is-top-position', {
+					'is-flipped': dividerTop?.flipped,
 					}
 				) }
-			/>
+			>
+				<SvgDivider 
+					//className={ 'combobox-control-option__divider-shape' }
+					shape={ dividerTop.shape }
+				/>
+			</span>
 			<span
-				aria-label={
-					__( 'Bottom shape:', 'tzm-section-block' ) +
-					' ' +
-					getDividerItem( dividerBottom.shape, 'name' )
+				aria-label={ dividerBottom.shape 
+					? __( 'Bottom shape:', 'tzm-section-block' ) + ' ' +	shapeData[dividerBottom.shape]?.name 
+					: __( 'No bottom shape selected', 'tzm-section-block' )
 				}
-				className={ clsx(
-					'component-color-indicator',
-					'indicator-divider-bottom',
-					{
-						[ getDividerItem( dividerBottom.shape, 'className' ) ]:
-							getDividerItem( dividerBottom.shape, 'className' ),
-						'divider-flipped': dividerBottom.flipped,
+				className={ clsx( 'component-color-indicator',
+					'is-bottom-position', {
+					'is-flipped': dividerBottom?.flipped,
 					}
 				) }
-			/>
+			>
+				<SvgDivider 
+					//className={ 'combobox-control-option__divider-shape' }
+					shape={ dividerBottom.shape }
+				/>
+			</span>
 		</span>
 	);
+
+	/* Shape - Option item render function */
+	const renderDividerPreview = ({item}) => {
+		if (item.disabled) {
+			return <div>{item.label}</div>
+		}
+
+		return (
+			<div>
+				<SvgDivider 
+					className={ 'combobox-control-option__divider-shape' }
+					shape={ item.value }
+				/>
+				<span>{item.label}</span>
+			</div>
+		);
+	};
+
 
 	const DividerTopSettings = () => {
 		return (
 			<fieldset>
+
 				{ /* --- Shape Dividers: Top Shape --- */ }
-				<CustomSelectControl __next40pxDefaultSize
-					className={ clsx( 'control-divider-top-shape', {
-						'divider-flipped': dividerTop.flipped,
+				<ComboboxControl __next40pxDefaultSize
+					className={ clsx( 'control-divider-shape', 
+						'is-top-position', {
+						'is-flipped': dividerTop?.flipped,
 					} ) }
-					options={ SVG_SHAPE_OPTIONS }
-					onChange={ ( { selectedItem } ) => setAttributes({
+					__experimentalRenderItem={ renderDividerPreview }
+					options={ dividerShapeOptions }
+					placeholder={ dividerTop?.shape ? shapeData[dividerTop?.shape]?.name : __("- Disabled -", "tzm-section-block") }
+					onChange={ (newValue) => setAttributes({
 						dividerTop: {
 							...dividerTop,
-							shape: selectedItem.key,
+							shape: newValue,
 						},
 					}) }
-					value={ SVG_SHAPE_OPTIONS.find(
-						( option ) => option.key === dividerTop.shape
-					) }
+					value={ dividerTop?.shape }
 				/>
 				{ /* --- Shape Dividers: Top Flipped --- */ }
 				<ToggleControl
-					className={ 'control-divider-top-flipped' }
+					className="control-divider-flipped"
 					label={ __( 'Flip divider shape', 'tzm-section-block' ) }
 					checked={ !! dividerTop.flipped }
 					onChange={ ( newFlipped ) => setAttributes({
@@ -265,7 +292,7 @@ export default function SectionInspectorControls( {
 				/>
 				{ /* --- Shape Dividers: Top Color --- */ }
 				<ColorPalette __experimentalIsRenderedInSidebar
-					className="block-editor-control-color-palette divider-color"
+					className="control-divider-color"
 					enableAlpha
 					value={ dividerTop.color }
 					onChange={ ( nextColor ) => setAttributes({
@@ -277,7 +304,7 @@ export default function SectionInspectorControls( {
 				/>
 				{ /* --- Shape Dividers: Top Height --- */ }
 				<RangeControl __next40pxDefaultSize
-					className={ 'block-editor-control-range divider-height'	}
+					className="control-divider-height"
 					label={ __( 'Divider height', 'tzm-section-block' ) }
 					value={ dividerTop.height * 4 }
 					onChange={ ( nextHeight ) => setAttributes({
@@ -298,24 +325,25 @@ export default function SectionInspectorControls( {
 		return (
 			<fieldset>
 				{ /* --- Shape Dividers: Bottom Shape --- */ }
-				<CustomSelectControl __next40pxDefaultSize
-					className={ clsx( 'control-divider-bottom-shape', {
-						'divider-flipped': dividerBottom.flipped,
+				<ComboboxControl __next40pxDefaultSize
+					className={ clsx( 'control-divider-shape', 
+						'is-bottom-position', {
+						'is-flipped': dividerBottom?.flipped,
 					} ) }
-					options={ SVG_SHAPE_OPTIONS }
-					onChange={ ( { selectedItem } ) => setAttributes({
+					__experimentalRenderItem={ renderDividerPreview }
+					options={ dividerShapeOptions }
+					placeholder={ dividerBottom?.shape ? shapeData[dividerBottom?.shape]?.name : __("- Disabled -", "tzm-section-block") }
+					onChange={ (newValue) => setAttributes({
 						dividerBottom: {
 							...dividerBottom,
-							shape: selectedItem.key,
+							shape: newValue,
 						},
 					}) }
-					value={ SVG_SHAPE_OPTIONS.find(
-						( option ) => option.key === dividerBottom.shape
-					) }
+					value={ dividerBottom?.shape }
 				/>
 				{ /* --- Shape Dividers: Bottom Flipped --- */ }
 				<ToggleControl
-					className={ 'control-divider-bottom-flipped' }
+					className="control-divider-flipped"
 					label={ __( 'Flip divider shape', 'tzm-section-block' ) }
 					checked={ !! dividerBottom.flipped }
 					onChange={ ( newFlipped ) => setAttributes({
@@ -327,7 +355,7 @@ export default function SectionInspectorControls( {
 				/>
 				{ /* --- Shape Dividers: Bottom Color --- */ }
 				<ColorPalette __experimentalIsRenderedInSidebar
-					className="block-editor-control-color-palette divider-color"
+					className="control-divider-color"
 					enableAlpha
 					value={ dividerBottom.color }
 					onChange={ ( nextColor ) => setAttributes({
@@ -339,7 +367,7 @@ export default function SectionInspectorControls( {
 				/>
 				{ /* --- Shape Dividers: Bottom Height --- */ }
 				<RangeControl __next40pxDefaultSize
-					className={ 'block-editor-control-range divider-height'	}
+					className="control-divider-height"
 					label={ __( 'Divider height', 'tzm-section-block' ) }
 					value={ dividerBottom.height * 4 }
 					onChange={ ( nextHeight ) => setAttributes({
@@ -365,11 +393,8 @@ export default function SectionInspectorControls( {
 						<SelectControl __next40pxDefaultSize
 							className="block-editor-control-select image-parallax"
 							label={ __('Image Parallax', 'tzm-section-block') }
-							help={ __('Note: Parallax effects are currently visible only on the frontend of your website and won’t be previewed in the Block Editor.', 'tzm-section-block') }
 							value={ parallaxMode }
-							onChange={ ( next ) => setAttributes({
-								parallaxMode: next
-							}) }
+							onChange={ ( next ) => setAttributes({ parallaxMode: next }) }
 							options={ [
 								{
 									value: '',
@@ -417,19 +442,16 @@ export default function SectionInspectorControls( {
 								}) }
 							/>
 						) }
-
-						{ ! parallaxMode && ! isRepeated && (
-							<FocalPointPicker
-								label={ __( 'Focal point picker' ) }
-								url={ url }
-								value={ focalPoint }
-								onDragStart={ imperativeFocalPointPreview }
-								onDrag={ imperativeFocalPointPreview }
-								onChange={ ( newFocalPoint ) =>	setAttributes({
-									focalPoint: newFocalPoint,
-								}) }
-							/>
-						) }
+						<FocalPointPicker
+							label={ __( 'Focal point picker' ) }
+							url={ url }
+							value={ focalPoint }
+							onDragStart={ imperativeFocalPointPreview }
+							onDrag={ imperativeFocalPointPreview }
+							onChange={ ( newFocalPoint ) =>	setAttributes({
+								focalPoint: newFocalPoint,
+							}) }
+						/>
 						{ ! useFeaturedImage &&
 							isImageBackground &&
 							isImgElement && (

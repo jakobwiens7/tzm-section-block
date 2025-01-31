@@ -17,38 +17,41 @@ import {
  * Internal dependencies
  */
 import {
-	IMAGE_BACKGROUND_TYPE,
+	//IMAGE_BACKGROUND_TYPE,
 	VIDEO_BACKGROUND_TYPE,
 	dimRatioToClass,
-	mediaPosition,
-	SvgDivider,
 } from './_shared';
+
+import { 
+	SvgDivider
+} from './_dividers';
+
+import MediaBackground from './media-background';
+
 
 export default function save( { attributes } ) {
 	const {
 		tagName: Tag,
-		backgroundType,
 		gradient,
 		verticalAlignment,
 		customGradient,
 		customOverlayColor,
 		dimRatio,
-		focalPoint,
+		backgroundType,
 		useFeaturedImage,
+		url,
 		parallaxMode,
 		isDark,
-		isRepeated,
 		overlayColor,
-		url,
-		alt,
-		id,
 		minHeight: minHeightProp,
 		minHeightUnit,
 		minHeightSelector,
 		dividerTop,
 		dividerBottom,
-		verticalClip
+		verticalClip,
 	} = attributes;
+
+	const isVideo = VIDEO_BACKGROUND_TYPE === backgroundType;
 
 	const overlayColorClass = getColorClassName(
 		'background-color',
@@ -61,11 +64,6 @@ export default function save( { attributes } ) {
 			? `${ minHeightProp }${ minHeightUnit }`
 			: minHeightProp;
 
-	const isImageBackground = IMAGE_BACKGROUND_TYPE === backgroundType;
-	const isVideoBackground = VIDEO_BACKGROUND_TYPE === backgroundType;
-
-	const isImgElement = ! isRepeated;
-
 	const style = {
 		minHeight: ( ! minHeightSelector && minHeight ) || undefined,
 		overflow: ! verticalClip ? "clip visible" : undefined
@@ -76,49 +74,18 @@ export default function save( { attributes } ) {
 		background: customGradient ? customGradient : undefined,
 	};
 
-	const objectPosition =
-		// prettier-ignore
-		focalPoint && isImgElement
-			  ? mediaPosition(focalPoint)
-			  : undefined;
-
-	const backgroundImage = url ? `url(${ url })` : undefined;
-
-	const backgroundPosition = mediaPosition( focalPoint );
-
 	const classes = clsx( {
 		'is-light': ! isDark,
-		'is-repeated': isRepeated,
-		[ `has-parallax-${ parallaxMode }` ]:
-			parallaxMode && ( isVideoBackground || isImgElement ),
 		[ `is-vertically-aligned-${ verticalAlignment }` ]: verticalAlignment,
 	} );
 
-	const imgClasses = clsx(
-		'wp-block-tzm-section__image-background',
-		id ? `wp-image-${ id }` : null,
-		{
-			'is-repeated': isRepeated,
-			'jarallax-img': parallaxMode && isImageBackground && isImgElement,
-			[ `has-parallax-${ parallaxMode }` ]:
-				parallaxMode && isImageBackground && ! isImgElement,
-		}
-	);
-
 	const gradientValue = gradient || customGradient;
-
-	const urlExt = url?.split( /[#?]/ )[ 0 ].split( '.' ).pop().trim();
 
 	return (
 		<Tag { ...useBlockProps.save( { className: classes, style } ) }
 			data-height-selector={
 				minHeight === '100vh' && minHeightSelector
 					? minHeightSelector
-					: undefined
-			}
-			data-video-src={
-				parallaxMode && isVideoBackground && url
-					? urlExt + ':' + url
 					: undefined
 			}
 		>
@@ -137,48 +104,29 @@ export default function save( { attributes } ) {
 				style={ bgStyle }
 			/>
 
-			{ ! useFeaturedImage &&
-				isImageBackground &&
-				url &&
-				( isImgElement ? (
-					<img
-						className={ imgClasses }
-						alt={ alt }
-						src={ url }
-						style={ { objectPosition } }
-						data-object-fit="cover"
-						data-object-position={ objectPosition }
-					/>
-				) : (
-					<div
-						role="img"
-						className={ imgClasses }
-						style={ { backgroundPosition, backgroundImage } }
-						data-img-size={ parallaxMode && isRepeated ? 'auto' : undefined	}
-						data-img-repeat={ parallaxMode && isRepeated ? 'repeat' : undefined	}
-					/>
-				) ) }
-			{ isVideoBackground && url && ! parallaxMode && (
-				<video
-					className={ clsx(
-						'wp-block-tzm-section__video-background',
-						'intrinsic-ignore'
-					) }
-					autoPlay
-					muted
-					loop
-					playsInline
-					src={ url }
-					style={ { objectPosition } }
-					data-object-fit="cover"
-					data-object-position={ objectPosition }
-				/>
+			{ !useFeaturedImage && !! url && (
+				parallaxMode && ( 
+					isVideo || 
+					( !isVideo && parallaxMode !== 'fixed' ) 
+				) ? (
+					<parallax-wrapper className={ `has-parallax-${ parallaxMode }` }>
+						<MediaBackground atts={ attributes }/>
+					</parallax-wrapper>
+				) : ( 
+					<MediaBackground atts={ attributes }/>
+				)
 			) }
 
-			{ !! dividerTop.shape && (
+			{ !! dividerTop?.shape && (
 				<SvgDivider
-					divider={ dividerTop }
-					position="top"
+					className={ clsx('wp-block-tzm-section__divider-shape',
+						`has-top-position`,
+						`has-${ dividerTop.shape }-shape`,
+						{ 'is-flipped': dividerTop.flipped }
+					) }
+					shape={ dividerTop.shape }
+					color={ dividerTop.color }
+					height={ dividerTop.height + "vw" }
 				/>
 			) }
 
@@ -188,10 +136,16 @@ export default function save( { attributes } ) {
 				} ) }
 			/>
 
-			{ !! dividerBottom.shape && (
-				<SvgDivider
-					divider={ dividerBottom }
-					position="bottom"
+			{ !! dividerBottom?.shape && (
+				<SvgDivider 
+					className={ clsx('wp-block-tzm-section__divider-shape',
+						`has-bottom-position`,
+						`has-${ dividerBottom.shape }-shape`,
+						{ 'is-flipped': dividerBottom.flipped }
+					) }
+					shape={ dividerBottom.shape }
+					color={ dividerBottom.color }
+					height={ dividerBottom.height + "vw" }
 				/>
 			) }
 		</Tag>

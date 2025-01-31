@@ -1,10 +1,8 @@
 === TZM Section Block ===
 Contributors:      jakobwiens
 Tags:              gutenberg, section, parallax, divider
-Requires at least: 5.6.0
-Tested up to:      6.7.0
-Stable tag:        1.0.0
-Requires PHP:      7.4.0
+Tested up to:      6.7
+Stable tag:        1.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,5 +69,5 @@ Absolutely! The plugin provides plenty of built-in options, but if you need more
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.1.0 =
 - Initial Release :)

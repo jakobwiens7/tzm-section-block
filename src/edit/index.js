@@ -32,13 +32,8 @@ import {
 	IMAGE_BACKGROUND_TYPE,
 	VIDEO_BACKGROUND_TYPE,
 	dimRatioToClass,
-	mediaPosition,
-	SvgDivider,
+	//mediaPosition
 } from '../_shared';
-
-import SectionInspectorControls from './inspector-controls';
-import SectionBlockControls from './block-controls';
-import ResizableSection from './resizable-section';
 
 import {
 	getMediaColor,
@@ -46,6 +41,16 @@ import {
 	DEFAULT_BACKGROUND_COLOR,
 	DEFAULT_OVERLAY_COLOR,
 } from '../_utils';
+
+import { 
+	SvgDivider
+} from '../_dividers';
+
+import MediaBackground from '../media-background';
+import SectionInspectorControls from './inspector-controls';
+import SectionBlockControls from './block-controls';
+import ResizableSection from './resizable-section';
+
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -96,14 +101,10 @@ function SectionEdit( {
 		backgroundType: originalBackgroundType,
 		useFeaturedImage,
 		dimRatio,
-		focalPoint,
 		parallaxMode,
 		isDark,
-		isRepeated,
 		minHeight,
 		minHeightUnit,
-		//minHeightSelector,
-		alt,
 		dividerTop,
 		dividerBottom,
 		verticalClip,
@@ -173,9 +174,12 @@ function SectionEdit( {
 		? mediaUrl
 		: // Ensure the url is not malformed due to sanitization through `wp_kses`.
 		  originalUrl?.replaceAll( '&amp;', '&' );
+
 	const backgroundType = useFeaturedImage
 		? IMAGE_BACKGROUND_TYPE
 		: originalBackgroundType;
+
+	const isVideo = VIDEO_BACKGROUND_TYPE === backgroundType;
 
 	//const { createErrorNotice } = useDispatch( noticesStore );
 	const { gradientClass, gradientValue } = __experimentalUseGradient();
@@ -306,23 +310,13 @@ function SectionEdit( {
 			? `${ minHeight }${ minHeightUnit }`
 			: minHeight;
 
-	const isImgElement = ! isRepeated;
-
 	const style = {
 		minHeight: minHeightWithUnit || undefined,
 		overflow: ! verticalClip ? "clip visible" : undefined
 	};
 
-	const backgroundImage = url ? `url(${ url })` : undefined;
-	const backgroundPosition = mediaPosition( focalPoint );
-
 	const bgStyle = { backgroundColor: overlayColor.color };
-	const mediaStyle = {
-		objectPosition:
-			focalPoint && isImgElement
-				? mediaPosition( focalPoint )
-				: undefined,
-	};
+
 
 	const hasInnerBlocks = useSelect(
 		( select ) =>
@@ -357,13 +351,14 @@ function SectionEdit( {
 	);
 
 	const mediaElement = useRef();
+
 	const currentSettings = {
 		isVideoBackground,
 		isImageBackground,
 		mediaElement,
 		hasInnerBlocks,
 		url,
-		isImgElement,
+		//isImgElement,
 		overlayColor,
 	};
 
@@ -455,16 +450,7 @@ function SectionEdit( {
 		'is-dark-theme': isDark,
 		'is-light': ! isDark,
 		'is-transient': isUploadingMedia,
-		'is-repeated': isRepeated,
-		[ `has-parallax-${ parallaxMode }` ]:
-			parallaxMode && ( isVideoBackground || isImgElement ),
 		[ `is-vertically-aligned-${ verticalAlignment }` ]: verticalAlignment,
-	} );
-
-	const imgClasses = clsx( 'wp-block-tzm-section__image-background', {
-		'jarallax-img': parallaxMode && isImageBackground && isImgElement,
-		[ `has-parallax-${ parallaxMode }` ]:
-			parallaxMode && isImageBackground && ! isImgElement,
 	} );
 
 
@@ -495,53 +481,43 @@ function SectionEdit( {
 					style={ { backgroundImage: gradientValue, ...bgStyle } }
 				/>
 
-				{ url &&
-					isImageBackground &&
-					( isImgElement ? (
-						<img
-							ref={ mediaElement }
-							className={ imgClasses }
-							alt={ alt }
-							src={ url }
-							style={ mediaStyle }
-						/>
-					) : (
-						<div
-							ref={ mediaElement }
-							role="img"
-							className={ clsx(
-								classes,
-								'wp-block-tzm-section__image-background'
-							) }
-							style={ { backgroundImage, backgroundPosition } }
-						/>
-					) ) }
-				{ url && isVideoBackground && (
-					<video
-						ref={ mediaElement }
-						className="wp-block-tzm-section__video-background"
-						autoPlay
-						muted
-						loop
-						src={ url }
-						style={ mediaStyle }
-					/>
+				{ !! url && (
+					!! parallaxMode && ( 
+						isVideo || 
+						( !isVideo && parallaxMode !== 'fixed' ) 
+					) ? (
+						<parallax-wrapper className={ `has-parallax-${ parallaxMode }` }>
+							<MediaBackground atts={ attributes } url={ url }/>
+						</parallax-wrapper>
+					) : ( 
+						<MediaBackground atts={ attributes } url={ url }/>
+					)
 				) }
 				{ isUploadingMedia && <Spinner /> }
 
-				{ !! dividerTop.shape && (
-					<SvgDivider
-						divider={ dividerTop }
-						position="top"
-						height={ dividerTop.height }
+				{ !! dividerTop?.shape && (
+					<SvgDivider 
+						className={ clsx('wp-block-tzm-section__divider-shape',
+							`has-top-position`,
+							`has-${ dividerTop.shape }-shape`,
+							{ 'is-flipped': dividerTop.flipped }
+						) }
+						shape={ dividerTop.shape }
+						color={ dividerTop.color }
+						height={ dividerTop.height + "vw" }
 					/>
 				) }
 				<div { ...innerBlocksProps } />
-				{ !! dividerBottom.shape && (
-					<SvgDivider
-						divider={ dividerBottom }
-						position="bottom"
-						height={ dividerBottom.height }
+				{ !! dividerBottom?.shape && (
+					<SvgDivider 
+						className={ clsx('wp-block-tzm-section__divider-shape',
+							`has-bottom-position`,
+							`has-${ dividerBottom.shape }-shape`,
+							{ 'is-flipped': dividerBottom.flipped }
+						) }
+						shape={ dividerBottom.shape }
+						color={ dividerBottom.color }
+						height={ dividerBottom.height + "vw" }
 					/>
 				) }
 			</Tag>
