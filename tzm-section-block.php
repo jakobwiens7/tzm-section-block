@@ -3,7 +3,7 @@
 /**
  * Plugin Name:		  TZM Section Block
  * Description:		  Wrap your content in a versatile section block - great for impressive sections with eye-catching features like parallax effects and shape dividers.
- * Version:			  1.1.0
+ * Version:			  1.1.1
  * Author:			  TezmoMedia - Jakob Wiens
  * Author URI:		  https://www.tezmo.media
  * License:			  GPL-2.0-or-later

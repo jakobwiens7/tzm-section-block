@@ -1,8 +1,8 @@
 === TZM Section Block ===
 Contributors:      jakobwiens
-Tags:              gutenberg, section, parallax, divider
+Tags:              section, parallax, divider, gutenberg, cover
 Tested up to:      6.7
-Stable tag:        1.1.0
+Stable tag:        1.1.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,7 @@ Follow the development, report issues, and get involved in improving the plugin.
 
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 
-3. In the block editor, search for "Section Block" and start using it.
+3. In the block editor, search for "Section" and start using it.
 
 
 
@@ -68,6 +68,9 @@ Absolutely! The plugin provides plenty of built-in options, but if you need more
 
 
 == Changelog ==
+
+= 1.1.1 =
+- Bugfix regarding parallax background
 
 = 1.1.0 =
 - Initial Release :)
