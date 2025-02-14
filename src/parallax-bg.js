@@ -1,184 +1,328 @@
-// https://github.com/u1ui/parallax-bg.el
+/**
+ * Parallax Background Web Component (Based on <u1-parallax-bg> - element)
+ * @version 1.0
+ * @description Creates parallax effect for background elements with WordPress/Gutenberg editor compatibility
+ * @author Jakob Wiens <https://tezmo.media>
+ * 
+ * @see Original version: https://github.com/u1ui/parallax-bg.el
+ * 
+ * @license
+ * MIT License
+ * 
+ * Copyright (c) 2021 Tobias Buschor
+ * Copyright (c) 2025 Jakob Wiens
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
+/**
+ * Detect if we're in WordPress Block Editor environment
+ * @returns {boolean} True if in Gutenberg editor
+ */
+const isEditorEnvironment = () => {
+    return typeof wp !== 'undefined' && 
+           typeof wp.data !== 'undefined' && 
+           document.body.classList.contains('block-editor-page');
+};
+
+/**
+ * Get appropriate scroll container based on environment
+ * @returns {HTMLElement} The main scrollable element
+ */
+const getScrollContainer = () => {
+    if (isEditorEnvironment()) {
+        // Prioritize Gutenberg's content areas to handle editor-specific layout
+        return document.querySelector('.interface-interface-skeleton__content') || 
+               document.querySelector('.edit-post-layout__content') || 
+               document.body;
+    }
+    return document.scrollingElement || document.documentElement;
+};
+
+// Active elements pool
 const pool = new Set();
 
+/**
+ * Parallax background management object
+ * @namespace paraxBg
+ */
 const paraxBg = {
+    /**
+     * Add element to active pool
+     * @param {HTMLElement} element - Parallax element to add
+     */
     add(element){
         pool.add(element)
+        // Initialize listeners when first element is added
         pool.size === 1 && addListeners();
-        //element.connect();
     },
+    
+    /**
+     * Remove element from active pool
+     * @param {HTMLElement} element - Parallax element to remove
+     */
     remove(element){
         pool.delete(element);
-        //pool.size === 0 && removeListeners(); // todo
+        // TODO: Implement listener cleanup when pool empties
     },
+    
+    /**
+     * Update positions for all registered elements
+     */
     positionize(){
-        //requestAnimationFrame(()=>{
-            pool.forEach(item=>item.positionize());
-        //});
+        pool.forEach(item => item.positionize());
     },
+    
+    /**
+     * Update layouts for all registered elements
+     */
     layout(){
-        pool.forEach(item=>item.layout());
+        pool.forEach(item => item.layout());
     }
-}
+};
 
-// cache dimensions. Is it worth it?
-let pageY;
-let winHeight;
-let scrollHeight;
-function setVPDimensions(){
-    pageY = scrollY;
-    winHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0); // was innerHeight, better this?: https://stackoverflow.com/questions/1248081/how-to-get-the-browser-viewport-dimensions
-    scrollHeight = document.documentElement.scrollHeight;
+// Cached viewport dimensions
+let pageY;   // Current scroll position
+let winHeight; // Viewport height
+let scrollHeight; // Total scrollable height
+
+/**
+ * Update cached viewport dimensions
+ */
+function setVPDimensions() {
+    const scrollContainer = getScrollContainer();
+    pageY = scrollContainer.scrollTop;
+    winHeight = scrollContainer.clientHeight;
+    scrollHeight = scrollContainer.scrollHeight;
 }
+// Initial dimension setup
 setVPDimensions();
 
-function addListeners(){
-	addEventListener('DOMContentLoaded', paraxBg.layout);
-	addEventListener('load', ()=>{
-        paraxBg.layout();
-        paraxBg.positionize();
-    });
-	document.addEventListener('scroll', ()=>{
-        pageY = scrollY;
-        requestAnimationFrame(()=>paraxBg.positionize()) // better!
-    });
-	addEventListener('wheel', ()=>{ // for firefox
-        pageY = scrollY;
-        requestAnimationFrame(()=>paraxBg.positionize())
-    });
+/**
+ * Set up global event listeners
+ */
+function addListeners() {
+    const scrollContainer = getScrollContainer();
 
-	addEventListener('resize', ()=>{
+    /**
+     * Handle scroll events and update positions
+     */
+    const handleScroll = () => {
+        pageY = scrollContainer.scrollTop;
+        requestAnimationFrame(() => paraxBg.positionize());
+    };
+
+    // Editor-specific event handling
+    if (isEditorEnvironment()) {
+        scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    } 
+    // Regular browser handling
+    else {
+        document.addEventListener('scroll', handleScroll, { passive: true });
+        addEventListener('wheel', handleScroll);
+    }
+
+    // Common lifecycle events
+    addEventListener('DOMContentLoaded', paraxBg.layout);
+    addEventListener('load', paraxBg.layout);
+
+    /**
+     * Handle resize events and recalculate layouts
+     */
+    const handleResize = () => {
         setVPDimensions();
         paraxBg.layout();
         paraxBg.positionize();
-    });
-    const rs = new ResizeObserver(entries => {
-        setVPDimensions();
-        paraxBg.layout();
-        paraxBg.positionize();
-    })
-    rs.observe(document.body);
+    };
+
+    // Set up resize observer for content changes
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(isEditorEnvironment() ? scrollContainer : document.body);
 }
 
+/**
+ * ParallaxBg Custom Web Component
+ * @customElement parallax-wrapper
+ * @extends HTMLElement
+ */
 class ParallaxBg extends HTMLElement {
     constructor() {
         super();
-        let shadowRoot = this.attachShadow({mode:'open'});
+        const shadowRoot = this.attachShadow({ mode: 'open' });
 
+        // Shadow DOM structure
         shadowRoot.innerHTML = `
         <style>
-        :host {
-            position:absolute;
-            overflow:hidden;
-            top:0; left:0; right:0; // todo if safari: inset
-            bottom:-.2px;
-            xz-index:-1;
-            xwill-change:transform;
-            xbackground-size:cover;
-        }
-        .mover {
-            position:absolute;
-            top:0; bottom:0; left:0; right:0;
-            z-index:-1;
-            will-change:transform;
-            background: inherit;
-        }
-        .visible {
-            display:flex;
-            flex-direction:row;
-            align-items:stretch;
-            justify-content:center;
-            position:absolute;
-            top:0; bottom:0; left:0; right:0;
-        }
+            :host {
+                position: absolute !important; /* Override editor styles */
+                z-index: 0 !important; /* Ensure visibility in editor */
+                pointer-events: none; /* Allow block selection */
+                overflow: hidden;
+                top: 0; 
+                left: 0; 
+                right: 0;
+                bottom: -.2px; /* Safari fix */
+                will-change: transform;
+                background-size: cover;
+            }
+            .mover {
+                pointer-events: none; /* Prevent UI interference */
+                position: absolute;
+                top: 0; 
+                bottom: 0; 
+                left: 0; 
+                right: 0;
+                z-index: -1;
+                will-change: transform;
+                background: inherit;
+            }
+            .visible {
+                display: flex;
+                flex-direction: row;
+                align-items: stretch;
+                justify-content: center;
+                position: absolute;
+                top: 0; 
+                bottom: 0; 
+                left: 0; 
+                right: 0;
+            }
         </style>
-        <div class=mover part=_mover>
-            <slot class=visible></slot>
+        <div class="mover" part="_mover">
+            <slot class="visible"></slot>
         </div>
         `;
-        // .mover {will-change:transform} brings a lot, but the budget is easily exceeded... we should only do this if in the visible area.
 
-        this.mover   = this.shadowRoot.querySelector('.mover');
+        // Component references
+        this.mover = this.shadowRoot.querySelector('.mover');
         this.visible = this.shadowRoot.querySelector('.visible');
 
+        // Get speed from CSS custom property
         const style = getComputedStyle(this);
         const speed = style.getPropertyValue('--parallax-bg-speed');
-        this.speed = speed === '' ? .5 : parseFloat(speed);
+        this.speed = speed === '' ? 0.5 : parseFloat(speed);
     }
-	connectedCallback() {
-        this.stage = this.offsetParent;
-        if (this.stage.tagName === 'BODY') this.stage.style.position = 'relative'; // what can go wrong?
 
-        scrollHeight = document.documentElement.scrollHeight; // todo: little slow
-
+    /**
+     * Element connected to DOM
+     */
+    connectedCallback() {
+        // Find positioning parent
+        this.stage = this.offsetParent || 
+                    document.querySelector('.edit-post-visual-editor__content-area') || 
+                    document.body;
+    
+        // Prevent body modification in editor
+        if (isEditorEnvironment() && this.stage.tagName === 'BODY') {
+            return;
+        }
+        
+        // Initial setup
+        scrollHeight = this.stage.scrollHeight;
         this.layout();
         this.positionize();
-
         paraxBg.add(this);
     }
-    disconnectedCallback(){
+
+    /**
+     * Element disconnected from DOM
+     */
+    disconnectedCallback() {
         paraxBg.remove(this);
     }
-    layout(){
+
+    /**
+     * Calculate layout dimensions
+     */
+    layout() {
         const rect = this.stage.getBoundingClientRect();
-        this.stageRect = { // todo: add border-width
-            top:    pageY + rect.top,
+        
+        // Stage dimensions relative to document
+        this.stageRect = {
+            top: pageY + rect.top,
             bottom: pageY + rect.bottom,
             height: rect.height,
-            yCenter: (rect.top + pageY) + rect.height/2,
+            yCenter: (rect.top + pageY) + rect.height / 2,
         };
 
-        // calculate offset if stage is on top
+        // Calculate base offset
         let relevantTop = this.stageRect.top;
-
-        // if its faster then normal, calculate offset on bottom of stage
         if (this.speed > 1) relevantTop += this.stageRect.height;
 
         let offset = this.offsetAtPageY(relevantTop);
         offset = Math.abs(offset);
 
-        // if it moves the opposite, add the stage height to the offset
+        // Handle reverse movement
         if (this.speed < 0) offset += (-this.speed * this.stageRect.height);
 
-        this.mover.style.top    = -offset + 'px';
-        this.mover.style.bottom = -offset + 'px';
+        // Apply offset to mover element
+        this.mover.style.top = `${-offset}px`;
+        this.mover.style.bottom = `${-offset}px`;
 
-        // if the element cannot go further down or up
-        // the [parallax-bg-visible] element
-        // the most complicated part of the lib, seems to work well, but it was born by trial and error
+        // Update visible area (complex calculation block)
         if (this.speed < 0) {
-            console.warn('parallax-bg: parallax-bg-visible attribute is not implemented for speed < 0');
+            console.warn('parallax-bg: Negative speed visible area not implemented');
             return;
         }
-        //const visibleEl = this.querySelector('[parallax-bg-visible]');
-        const visibleEl = this.visible;
-        if (visibleEl) {
-            let top = 0;
-            let bottom = 0;
-            const offsetAtElTop    = this.offsetAtPageY(this.stageRect.top);
-            const offsetAtTop      = this.offsetAtPageY(0);
+        
+        if (this.visible) {
+            // Calculate visible area bounds based on scroll positions
+            let top = 0, bottom = 0;
+            const offsetAtElTop = this.offsetAtPageY(this.stageRect.top);
+            const offsetAtTop = this.offsetAtPageY(0);
             const offsetAtElBottom = this.offsetAtPageY(this.stageRect.bottom - winHeight);
-            const offsetAtBottom   = this.offsetAtPageY(scrollHeight - winHeight);
+            const offsetAtBottom = this.offsetAtPageY(scrollHeight - winHeight);
+
+            // Different calculations for speed ranges
             if (this.speed < 1) {
-                top    = Math.min(offsetAtElTop, offsetAtBottom);
+                top = Math.min(offsetAtElTop, offsetAtBottom);
                 bottom = Math.max(offsetAtTop, offsetAtElBottom);
-            }
-            if (this.speed > 1) {
-                top    = Math.max(offsetAtTop, -offsetAtElBottom);
+            } else {
+                top = Math.max(offsetAtTop, -offsetAtElBottom);
                 bottom = Math.min(-offsetAtElTop, offsetAtBottom);
             }
-            visibleEl.style.top    = offset - top  + 'px';
-            visibleEl.style.bottom = offset + bottom + 'px';
+
+            // Apply visible area bounds
+            this.visible.style.top = `${offset - top}px`;
+            this.visible.style.bottom = `${offset + bottom}px`;
         }
     }
-    offsetAtPageY(pageY){
-        const moved = this.stageRect.yCenter - (pageY + winHeight/2);
-        return moved*(this.speed-1);
+
+    /**
+     * Calculate vertical offset for given scroll position
+     * @param {number} pageY - Current scroll position
+     * @returns {number} Calculated offset
+     */
+    offsetAtPageY(pageY) {
+        const moved = this.stageRect.yCenter - (pageY + winHeight / 2);
+        return moved * (this.speed - 1);
     }
-    positionize(){
-        this.mover.style.transform = 'translate3d(0, '+ this.offsetAtPageY(pageY) +'px, 0)';
+    
+    /**
+     * Update element position based on current scroll
+     */
+    positionize() {
+        const scrollContainer = getScrollContainer();
+        const currentScroll = scrollContainer.scrollTop;
+        this.mover.style.transform = `translate3d(0, ${this.offsetAtPageY(currentScroll)}px, 0)`;
     }
 }
 
-customElements.define('parallax-wrapper', ParallaxBg)
+// Register custom element
+customElements.define('parallax-wrapper', ParallaxBg);
