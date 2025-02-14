@@ -30,8 +30,7 @@ $white: #fff;
 	 *   - Issue with background color specificity: https://github.com/WordPress/gutenberg/issues/26545
 	 *   - Issue with alternative fix: https://github.com/WordPress/gutenberg/issues/26545
 	 */
-	.has-background-dim:not([class*="-background-color"]),
-	.has-background-dim.has-background-gradient {
+	.has-background-dim:not([class*="-background-color"]):not(.has-background-gradient) {
 		background-color: #000000;
 	}
 
@@ -182,13 +181,13 @@ $white: #fff;
 // If text color has not been set adjust default color
 :where(.wp-block-tzm-section:not(.has-text-color)),
 :where(.wp-block-tzm-section-image:not(.has-text-color)) {
-	color: $black;
+	color: $white;
 }
 
-/*:where(.wp-block-tzm-section.is-light:not(.has-text-color)),
+:where(.wp-block-tzm-section.is-light:not(.has-text-color)),
 :where(.wp-block-tzm-section-image.is-light:not(.has-text-color)) {
 	color: $black;
-}*/
+}
 
 :root {
 	:where(.wp-block-tzm-section p:not(.has-text-color)),
