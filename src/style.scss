@@ -32,7 +32,7 @@ $white: #fff;
 	 */
 	.has-background-dim:not([class*="-background-color"]),
 	.has-background-dim.has-background-gradient {
-		background-color: transparent;
+		background-color: #000000;
 	}
 
 	&.has-parallax {
@@ -179,19 +179,16 @@ $white: #fff;
 	}
 }
 
-// If Section block's text color has not been set adjust default color
-// based on if overlay is light or not. The following styles leverage
-// `:where` to allow for generic global styles that have a low specificity to
-// still take precedence.
+// If text color has not been set adjust default color
 :where(.wp-block-tzm-section:not(.has-text-color)),
 :where(.wp-block-tzm-section-image:not(.has-text-color)) {
-	color: $white;
-}
-
-:where(.wp-block-tzm-section.is-light:not(.has-text-color)),
-:where(.wp-block-tzm-section-image.is-light:not(.has-text-color)) {
 	color: $black;
 }
+
+/*:where(.wp-block-tzm-section.is-light:not(.has-text-color)),
+:where(.wp-block-tzm-section-image.is-light:not(.has-text-color)) {
+	color: $black;
+}*/
 
 :root {
 	:where(.wp-block-tzm-section p:not(.has-text-color)),
@@ -204,20 +201,6 @@ $white: #fff;
 		color: inherit;
 	}
 }
-
-/*.u1-parallax-bg-stage {
-	position: relative;
-	// prevent margin collapse on inner element
-	display: flow-root;
-	// needed? else the parallax-element will go behinde everithing with a stackingcontext?
-	z-index: 0;
-}
-@supports not (display: flow-root) {
-	// zzz if safari
-	.u1-parallax-bg-stage {
-		padding: 0.2px;
-	}
-}*/
 
 parallax-wrapper {
 	position: absolute;
