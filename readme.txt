@@ -2,7 +2,7 @@
 Contributors:      jakobwiens
 Tags:              section, parallax, divider, gutenberg, cover
 Tested up to:      6.7
-Stable tag:        1.1.1
+Stable tag:        1.1.2
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,8 +69,9 @@ Absolutely! The plugin provides plenty of built-in options, but if you need more
 
 == Changelog ==
 
-= 1.1.1 =
+= 1.1.2 =
 - Bugfix regarding parallax background
+- Bugfix regarding text/overlay colors
 
 = 1.1.0 =
 - Initial Release :)
